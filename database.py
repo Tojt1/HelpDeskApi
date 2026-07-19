@@ -25,6 +25,12 @@ cursor.execute("CREATE TABLE IF NOT EXISTS tickets (id bigint GENERATED ALWAYS A
                "FOREIGN KEY (author_id) REFERENCES users(id),"
                "FOREIGN KEY (agent_id) REFERENCES users(id) )")
 
+cursor.execute("CREATE TABLE IF NOT EXISTS comment (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
+               "content TEXT,"
+               "ticket_id INTEGER,"
+               "agent_id INTEGER,"
+               "created timestamptz)")
+
 connection.commit()
 cursor.close()
 connection.close()
