@@ -24,3 +24,6 @@ def hash_password(password):
 def check_password(password, hashed_password):
     bpassword = password.encode("utf-8")
     return bcrypt.checkpw(bpassword, hashed_password.encode("utf-8"))
+
+def check_email(email):
+    pass
