@@ -11,7 +11,7 @@ def create_tables():
                    "name TEXT NOT NULL,"
                    "email Varchar(255) UNIQUE NOT NULL,"
                    "password TEXT NOT NULL,"
-                   "role TEXT CHECK (role IN ('CUSTOMER', 'ADMIN')) NOT NULL,"
+                   "role TEXT CHECK (role IN ('CUSTOMER', 'ADMIN')) DEFAULT 'CUSTOMER'  NOT NULL,"
                    "active boolean DEFAULT true,"
                    "created timestamptz DEFAULT now())")
 

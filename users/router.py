@@ -1,20 +1,21 @@
 from fastapi import APIRouter
-from schemas import User
-import service
-router = APIRouter()
+from users.schemas import User
+import users.service
 
-@router.get("/")
+router_user = APIRouter()
+
+@router_user.get("/")
 def get_users():
     try:
-        service.get_all_users()
+        return users.service.get_all_users()
     except ValueError:
         return {"error":"Nieprawidłowe dane"}, 400
 
-@router.post("/add-user")
+@router_user.post("/add-user")
 
 def create_user(user:User):
     try:
-        service.register_user(user)
+        users.service.register_user(user)
         return {"information": "Pomyslnie stworzono użytkownika"}, 200
     except ValueError:
         return {"error": "Podano niewłaściwe dane"}, 400
