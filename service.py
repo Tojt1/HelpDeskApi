@@ -1,12 +1,19 @@
 import bcrypt
+from database import create_connection
 
-def hash_password(password):
-    errors = []
+def register_user(email, password):
+    valid_email(email)
+    ensuer_email_not_exists(email)
+    valid_password(password)
+    hash_password(password)
+    #5 stworz uzytkownika
+    pass
+def valid_password(password):
     special_chars = "!@#$%^&*()_+-=[]{}|;':\",.<>/?"
     found = False
 
     if len(password) < 8:
-        errors.append("Hasło musi zawierać conajmniej 8 znaków")
+        raise ValueError("Hasło musi być dłższe niż 8 znaków")
 
     for char in password:
         if char in special_chars:
@@ -14,7 +21,11 @@ def hash_password(password):
             break
 
     if not found:
-        errors.append("Hasło nie posiada znaku specjalnego")
+        raise ValueError("Hasło nie posiada znaku specjalnego")
+
+    return None
+
+def hash_password(password):
 
     bpassword = password.encode("utf-8")
     hashed = bcrypt.hashpw(bpassword, bcrypt.gensalt())
@@ -25,5 +36,16 @@ def check_password(password, hashed_password):
     bpassword = password.encode("utf-8")
     return bcrypt.checkpw(bpassword, hashed_password.encode("utf-8"))
 
-def check_email(email):
-    pass
+def valid_email(email):
+    if "@" not in email:
+        return {"error": "email jest nieprawidłowy"}
+
+def ensuer_email_not_exists(email):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("SELECT id FROM users WHERE email = %s", (email,))
+        result = cur.fetchone()
+        if result is not None:
+            raise ValueError("Ten email jest już zajęty")
+
+
