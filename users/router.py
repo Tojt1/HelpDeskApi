@@ -7,7 +7,7 @@ router_user = APIRouter()
 @router_user.get("/")
 def get_users():
     try:
-        return users.service.get_all_users()
+        return users.service.load_all_users()
     except ValueError:
         return {"error":"Nieprawidłowe dane"}, 400
 

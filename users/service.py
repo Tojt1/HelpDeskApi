@@ -1,6 +1,7 @@
 import bcrypt
 from users import repository
 from database import  create_connection
+import repository
 
 def register_user(user):
     valid_email(user.email)
@@ -47,17 +48,12 @@ def ensuer_email_not_exists(email):
         raise ValueError("Ten email jest już zajęty")
 
 
-def get_all_users():
-    conn = create_connection()
-    with conn.cursor() as cur:
-        cur.execute("SELECT id, name, role FROM users")
-        rows = cur.fetchall()
-        return [{
-            "id":row[0],
-            "name":row[1],
-            "role":row[2]
-        }
-            for row in rows
-        ]
-
-get_all_users()
+def load_all_users():
+    rows = repository.get_all_users()
+    return [{
+        "id":row[0],
+        "name":row[1],
+        "role":row[2]
+    }
+        for row in rows
+    ]
