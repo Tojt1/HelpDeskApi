@@ -18,7 +18,7 @@ def create_tables():
     cursor.execute("CREATE TABLE IF NOT EXISTS tickets (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,"
                    "title TEXT NOT NULL,"
                    "description TEXT,"
-                   "status TEXT CHECK (status IN ('OPEN', 'IN_PROGRESS', 'CLOSED')) NOT NULL,"
+                   "status TEXT CHECK (status IN ('OPEN', 'IN_PROGRESS', 'CLOSED')) DEFAULT 'OPEN' NOT NULL,"
                    "priority INTEGER, "
                    "category TEXT,"
                    "author_id INTEGER NOT NULL,"
