@@ -47,6 +47,14 @@ def ensuer_email_not_exists(email):
     if result is not None:
         raise ValueError("Ten email jest już zajęty")
 
+def ensuer_email_exists(email):
+    result = repository.check_user_password(email)
+    if result is None:
+        raise ValueError("Nie ma takiego e-maila")
+
+    return result
+
+
 
 def load_all_users():
     rows = repository.get_all_users()
@@ -73,13 +81,6 @@ def decode_token(token):
     return result["id"]
 
 
-def ensuer_email_exists(email):
-    result = repository.check_user_password(email)
-    if result is None:
-        raise ValueError("Nie ma takiego e-maila")
-
-    return result
-
 def login_user(user):
     valid_email(user.email)
     result = ensuer_email_exists(user.email)
@@ -87,3 +88,14 @@ def login_user(user):
         return create_token(result)
     else:
         raise ValueError("Podano niepoprawne hasło")
+
+def user_info(token:str):
+    user_id = decode_token(token)
+    user = repository.download_user_info(user_id)
+    return {
+        "name":user[0],
+        "email": user[1],
+        "role": user[2],
+        "active": user[3],
+        "created": user[4]
+    }

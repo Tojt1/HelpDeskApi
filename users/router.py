@@ -23,6 +23,6 @@ def sign_up(user:RegisterUser):
 def sign_in(user:LoginUser):
     return users.service.login_user(user)
 
-@router_user.get("/get_post")
-def get_user_post(token: str):
-    return users.service.decode_token(token)
+@router_user.get("/me")
+def get_user_inf(token: str):
+    return users.service.user_info(token)

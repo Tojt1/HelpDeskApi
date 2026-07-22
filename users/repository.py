@@ -36,5 +36,11 @@ def get_id(email):
         cur.execute("SELECT id FROM users WHERE email = %s", (email, ))
         return cur.fetchone()
 
+def download_user_info(id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("SELECT name, email, role, active, created FROM users WHERE id = %s", (id, ))
+        return cur.fetchone()
+
 
 
