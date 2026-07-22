@@ -1,7 +1,7 @@
 import bcrypt
 from users import repository
-from database import  create_connection
-import repository
+import jwt
+import config
 
 def register_user(user):
     valid_email(user.email)
@@ -34,7 +34,7 @@ def hash_password(password):
     return hashed.decode("utf-8")
 
 
-def check_password(password, hashed_password):
+def check_password(password:str, hashed_password:str) ->bool:
     bpassword = password.encode("utf-8")
     return bcrypt.checkpw(bpassword, hashed_password.encode("utf-8"))
 
@@ -57,3 +57,33 @@ def load_all_users():
     }
         for row in rows
     ]
+
+
+
+def create_token(id):
+    token = jwt.encode(
+        {"id": id[1]},
+        config.SECRET_KEY,
+        algorithm="HS256"
+    )
+    return token
+
+def decode_token(token):
+    result = jwt.decode(token, config.SECRET_KEY, algorithms=["HS256"])
+    return result["id"]
+
+
+def ensuer_email_exists(email):
+    result = repository.check_user_password(email)
+    if result is None:
+        raise ValueError("Nie ma takiego e-maila")
+
+    return result
+
+def login_user(user):
+    valid_email(user.email)
+    result = ensuer_email_exists(user.email)
+    if check_password(user.password, result[0]):
+        return create_token(result)
+    else:
+        raise ValueError("Podano niepoprawne hasło")
