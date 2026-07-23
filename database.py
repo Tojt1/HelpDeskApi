@@ -33,8 +33,10 @@ def create_tables():
     cursor.execute("CREATE TABLE IF NOT EXISTS comment (id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
                    "content TEXT,"
                    "ticket_id INTEGER NOT NULL,"
-                   "agent_id INTEGER,"
-                   "created timestamptz)")
+                   "author_id INTEGER,"
+                   "created timestamptz DEFAULT now(),"
+                   ""
+                   "FOREIGN KEY (author_id) REFERENCES users(id) )")
 
     con.commit()
     cursor.close()
