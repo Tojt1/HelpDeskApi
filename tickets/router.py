@@ -15,3 +15,7 @@ def get_tickets():
 @router_ticket.get("/tickets/{ticket_id}")
 def get_ticket(ticket_id:int):
     return service.get_ticket_by_id(ticket_id)
+
+@router_ticket.patch("/tickets/{ticket_id}/assign")
+def assign_agent(ticket_id:int, jwt_code):
+    return service.assign_agent(ticket_id, jwt_code)

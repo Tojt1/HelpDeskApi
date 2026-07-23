@@ -1,4 +1,5 @@
 from database import create_connection
+import datetime
 
 def add_ticket(ticket, user_id):
     conn = create_connection()
@@ -28,3 +29,22 @@ def get_ticket(ticket_id):
             return cur.fetchone()
         except ValueError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
+
+def db_exists_ticket(ticket_id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("SELECT title FROM tickets WHERE id =%s", (ticket_id, ))
+        return cur.fetchone()
+
+def check_if_ticket_close(ticket_id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("SELECT status from tickets WHERE id = %s", (ticket_id, ))
+        return cur.fetchone()
+
+def assign_agent(ticket_id, user_id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("UPDATE tickets SET status ='IN_PROGRESS', agent_id = %s, updated = %s WHERE id = %s", (user_id, datetime.datetime.now(), ticket_id))
+        conn.commit()
+        return {"information": "Pomyślnie dodano agenta do ticketa"}

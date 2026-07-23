@@ -99,3 +99,8 @@ def user_info(token:str):
         "active": user[3],
         "created": user[4]
     }
+
+def check_user_admin(user_id):
+    if repository.get_user_role(user_id)[0] == "ADMIN":
+        return True
+    return False
