@@ -42,14 +42,14 @@ def check_ticket_is_close(ticket_id):
         return False
     return True
 
-def check_token_exist(ticket_id):
+def check_ticket_exist(ticket_id):
     if repository.db_exists_ticket(ticket_id) is None:
         return False
     return True
 
 def assign_agent(ticket_id, jwt_token):
     user_id = decode_token(jwt_token)
-    if not check_token_exist(ticket_id):
+    if not check_ticket_exist(ticket_id):
         return {"error":"Nie ma takiego tokenu"}
     if not check_user_admin(user_id):
         return {"error": "Nie masz uprawnień aby to zrobić"}
