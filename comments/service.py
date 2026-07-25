@@ -6,9 +6,9 @@ import comments.repository as repository
 
 def add_comment(ticket_id, comment, jwt):
     if not check_ticket_exist(ticket_id):
-        return {"error": "Nie ma takiego tokenu"}
+        return {"error": "Nie ma takiego ticketu"}
     if not check_ticket_is_close(ticket_id):
-        return {"error": "Ten token jst zamkniety"}
+        return {"error": "Ten ticket jst zamkniety"}
 
     user = decode_token(jwt)
 
@@ -16,11 +16,14 @@ def add_comment(ticket_id, comment, jwt):
 
 def get_all_comments(ticket_id):
     if not check_ticket_exist(ticket_id):
-        return {"error": "Nie ma takiego tokenu"}
+        return {"error": "Nie ma takiego ticketu"}
     if not check_ticket_is_close(ticket_id):
-        return {"error": "Ten token jst zamkniety"}
+        return {"error": "Ten ticket jst zamkniety"}
 
     rows = repository.get_all_comments(ticket_id)
+
+    if not rows:
+        return {"information": "Nie ma tutaj jeszcze komentazry"}
 
     return [{
         "id":row[0],
@@ -34,11 +37,13 @@ def get_all_comments(ticket_id):
 
 def get_comment(ticket_id, comment_id):
     if not check_ticket_exist(ticket_id):
-        return {"error": "Nie ma takiego tokenu"}
+        return {"error": "Nie ma takiego ticketu"}
     if not check_ticket_is_close(ticket_id):
-        return {"error": "Ten token jst zamkniety"}
+        return {"error": "Ten ticket jst zamkniety"}
 
     items = repository.get_comm(comment_id)
+    if items is None:
+        return {"error": "Ten komentarz nie istnieje"}
 
     return {
         "id":comment_id,

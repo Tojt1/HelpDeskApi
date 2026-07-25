@@ -2,6 +2,7 @@ import bcrypt
 from users import repository
 import jwt
 import config
+import exceptions
 
 def register_user(user):
     valid_email(user.email)
@@ -45,12 +46,12 @@ def valid_email(email):
 def ensuer_email_not_exists(email):
     result = repository.check_user_email(email)
     if result is not None:
-        raise ValueError("Ten email jest już zajęty")
+        raise exceptions.UserAlreadyExistsError("Ten email jest już zajęty")
 
 def ensuer_email_exists(email):
     result = repository.check_user_password(email)
     if result is None:
-        raise ValueError("Nie ma takiego e-maila")
+        raise exceptions.EmaildoesnotExistsError("Nie ma takiego e-maila")
 
     return result
 
@@ -87,7 +88,7 @@ def login_user(user):
     if check_password(user.password, result[0]):
         return create_token(result)
     else:
-        raise ValueError("Podano niepoprawne hasło")
+        raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
 
 def user_info(token:str):
     user_id = decode_token(token)

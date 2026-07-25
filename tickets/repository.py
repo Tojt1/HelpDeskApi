@@ -1,5 +1,6 @@
 from database import create_connection
 import datetime
+import exceptions
 
 def add_ticket(ticket, user_id):
     conn = create_connection()
@@ -8,7 +9,7 @@ def add_ticket(ticket, user_id):
             cur.execute("INSERT INTO tickets(title, description, priority, category, author_id) VALUES(%s, %s, %s, %s, %s)", (ticket.title, ticket.description, ticket.priority, ticket.category, user_id))
             conn.commit()
             return {"information": "Pomyślnie utworzono ticket"}
-        except ValueError:
+        except exceptions.DbAddError:
             return {"error":"podano nieprawidlowoa wartosc"}
 
 def get_all_tickets():
@@ -17,7 +18,7 @@ def get_all_tickets():
         try:
             cur.execute("SELECT id, title, description, status, priority, category, author_id, agent_id, created, updated, closed FROM tickets")
             return cur.fetchall()
-        except ValueError:
+        except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
 
 def get_ticket(ticket_id):
@@ -27,7 +28,7 @@ def get_ticket(ticket_id):
             cur.execute(
                 "SELECT id, title, description, status, priority, category, author_id, agent_id, created, updated, closed FROM tickets WHERE id =%s", (ticket_id, ))
             return cur.fetchone()
-        except ValueError:
+        except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
 
 def db_exists_ticket(ticket_id):
@@ -45,6 +46,9 @@ def check_if_ticket_close(ticket_id):
 def assign_agent(ticket_id, user_id):
     conn = create_connection()
     with conn.cursor() as cur:
-        cur.execute("UPDATE tickets SET status ='IN_PROGRESS', agent_id = %s, updated = %s WHERE id = %s", (user_id, datetime.datetime.now(), ticket_id))
-        conn.commit()
-        return {"information": "Pomyślnie dodano agenta do ticketa"}
+        try:
+            cur.execute("UPDATE tickets SET status ='IN_PROGRESS', agent_id = %s, updated = %s WHERE id = %s", (user_id, datetime.datetime.now(), ticket_id))
+            conn.commit()
+            return {"information": "Pomyślnie dodano agenta do ticketa"}
+        except exceptions.DbAddError:
+            return {"error": "wystąpił błą∂ podczas dodawania agenta"}

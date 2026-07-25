@@ -7,6 +7,8 @@ def create_ticket(ticket, user):
 
 def get_all_tickets():
     rows = repository.get_all_tickets()
+    if not rows:
+        return {"information": "Nie ma żadnych ticketów"}
     return[{
         "id":row[0],
         "title":row[1],
@@ -24,6 +26,9 @@ def get_all_tickets():
 
 def get_ticket_by_id(ticket_id):
     row = repository.get_ticket(ticket_id)
+
+    if row is None:
+        return {"error": "Nie ma takiego ticketu"}
     return{
         "id": row[0],
         "title": row[1],
@@ -50,11 +55,11 @@ def check_ticket_exist(ticket_id):
 def assign_agent(ticket_id, jwt_token):
     user_id = decode_token(jwt_token)
     if not check_ticket_exist(ticket_id):
-        return {"error":"Nie ma takiego tokenu"}
+        return {"error":"Nie ma takiego ticketu"}
     if not check_user_admin(user_id):
         return {"error": "Nie masz uprawnień aby to zrobić"}
     if not check_ticket_is_close(ticket_id):
-        return {"error": "Ten token jst zamkniety"}
+        return {"error": "Ten ticket jst zamkniety"}
 
     return repository.assign_agent(ticket_id, user_id)
 
