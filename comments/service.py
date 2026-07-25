@@ -31,3 +31,19 @@ def get_all_comments(ticket_id):
     }
         for row in rows
     ]
+
+def get_comment(ticket_id, comment_id):
+    if not check_ticket_exist(ticket_id):
+        return {"error": "Nie ma takiego tokenu"}
+    if not check_ticket_is_close(ticket_id):
+        return {"error": "Ten token jst zamkniety"}
+
+    items = repository.get_comm(comment_id)
+
+    return {
+        "id":comment_id,
+        "content":items[0],
+        "ticket_id":items[1],
+        "author_id":items[2],
+        "created":items[3]
+    }

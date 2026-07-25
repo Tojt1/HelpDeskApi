@@ -12,3 +12,9 @@ def get_all_comments(ticket_id):
     with conn.cursor() as cur:
         cur.execute("SELECT id, content, author_id, created FROM comment WHERE ticket_id = %s", (ticket_id, ))
         return cur.fetchall()
+
+def get_comm(comm_id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("SELECT content, ticket_id, author_id, created FROM comment WHERE id = %s", (comm_id, ))
+        return cur.fetchone()
