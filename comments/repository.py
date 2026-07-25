@@ -25,3 +25,10 @@ def delete_comm(comm_id):
         cur.execute("DELETE FROM tickets WHERE id = %s", (comm_id, ))
         conn.commit()
         return {"information": "Pomyślnie usunięto komentarz"}
+
+def update_comm(new_content,comm_id):
+    conn = create_connection()
+    with conn.cursor() as cur:
+        cur.execute("UPDATE comment SET content = %s WHERE id = %s", (new_content, comm_id))
+        conn.commit()
+        return {"information": "Pomyślnie zaktualizowano komentarz"}

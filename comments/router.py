@@ -20,3 +20,7 @@ def get_coemment_ticket(ticket_id, comment_id):
 @comments_router.delete("/tickets/{ticket_id}/comments/{comment_id}")
 def delete_comments_from_ticket(ticket_id, comment_id):
     return service.delete_comment(ticket_id, comment_id)
+
+@comments_router.patch("/tickets/{ticket_id}/comments/{comment_id}")
+def update_comment(ticket_id, comment_id, content):
+    return service.update_commnent(ticket_id, comment_id, content)

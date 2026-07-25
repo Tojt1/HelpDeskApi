@@ -55,3 +55,11 @@ def delete_comment(ticket_id, comment_id):
         return {"error": "Ten token jst zamkniety"}
 
     return repository.delete_comm(comment_id)
+
+def update_commnent(ticket_id, comment_id, content):
+    if not check_ticket_exist(ticket_id):
+        return {"error": "Nie ma takiego tokenu"}
+    if not check_ticket_is_close(ticket_id):
+        return {"error": "Ten token jst zamkniety"}
+
+    return update_commnent(content, comment_id)
