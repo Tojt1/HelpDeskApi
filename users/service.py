@@ -85,6 +85,7 @@ def decode_token(token):
 def login_user(user):
     valid_email(user.email)
     result = ensuer_email_exists(user.email)
+    print(result[0])
     if check_password(user.password, result[0]):
         return create_token(result)
     else:

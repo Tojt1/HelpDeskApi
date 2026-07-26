@@ -3,10 +3,6 @@ from tickets import repository
 
 
 
-
-
-
-
 def check_ticket_is_close(ticket_id):
     if repository.check_if_ticket_close(ticket_id) == "CLOSED":
         return False
