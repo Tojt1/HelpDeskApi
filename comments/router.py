@@ -1,12 +1,13 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from comments.schem import Comment
+from users.service import decode_token
 import comments.service as service
 
 comments_router = APIRouter()
 
 @comments_router.post("/tickets/{ticket_id}/comments")
-def create_comment(ticket_id:int, comment:Comment, jwt):
-    return service.add_comment(ticket_id, comment, jwt)
+def create_comment(ticket_id:int, comment:Comment, user_id = Depends(decode_token)):
+    return service.add_comment(ticket_id, comment, user_id)
 
 
 @comments_router.get("/tickets/{ticket_id}/comments")

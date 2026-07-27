@@ -24,15 +24,13 @@ def assign_agent(ticket_id, jwt_token):
 
     return repository.assign_agent(ticket_id, user_id)
 
-def create_ticket(ticket, user):
-    user_id = decode_token(user)
-    return repository.add_ticket(ticket, user_id)
+def create_ticket(ticket, user_d):
+    return repository.add_ticket(ticket, user_d)
 
-def get_ticket_by_id(ticket_id, limit, page):
+def get_ticket_by_id(ticket_id):
 
-    off_set = (page -1) * limit
 
-    row = repository.get_ticket(ticket_id, limit, off_set)
+    row = repository.get_ticket(ticket_id)
 
     if row is None:
         return {"error": "Nie ma takiego ticketu"}

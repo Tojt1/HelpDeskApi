@@ -37,12 +37,12 @@ def add_ticket(ticket, user_id):
         except exceptions.DbAddError:
             return {"error":"podano nieprawidlowoa wartosc"}
 
-def get_ticket(ticket_id, limit, offset):
+def get_ticket(ticket_id):
     conn = create_connection()
     with conn.cursor() as cur:
         try:
             cur.execute(
-                "SELECT * FROM tickets WHERE id =%s LIMIT %s OFFSET %s", (ticket_id, limit, offset ))
+                "SELECT * FROM tickets WHERE id =%s", (ticket_id, ))
             return cur.fetchone()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}

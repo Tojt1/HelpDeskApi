@@ -1,6 +1,5 @@
 from  fastapi.testclient import TestClient
 from main import app
-from users.service import create_token
 
 class TestUsers:
     client = TestClient(app)

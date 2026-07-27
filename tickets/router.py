@@ -1,13 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from tickets.schem import CreateTicket
 from tickets import service
 from typing import Optional
+from users.service import decode_token
 
 router_ticket = APIRouter()
 
 @router_ticket.post("/tickets")
-def create_ticket(ticket:CreateTicket, user):
-    return service.create_ticket(ticket, user)
+def create_ticket(ticket:CreateTicket, user_d = Depends(decode_token)):
+    return service.create_ticket(ticket, user_d)
 
 @router_ticket.get("/tickets")
 def get_tickets(status: Optional[str] = None, limit:int = 10, page:int = 1):
