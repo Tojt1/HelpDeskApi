@@ -1,7 +1,13 @@
 from users.service import decode_token, check_user_admin
 from tickets import repository
 
-
+allowed_sort = {
+    "id":"id",
+    "priority":"priority",
+    "category":"category",
+    "status":"status",
+    "created":"created"
+}
 
 def check_ticket_is_close(ticket_id):
     if repository.check_if_ticket_close(ticket_id) == "CLOSED":
@@ -28,8 +34,6 @@ def create_ticket(ticket, user_d):
     return repository.add_ticket(ticket, user_d)
 
 def get_ticket_by_id(ticket_id):
-
-
     row = repository.get_ticket(ticket_id)
 
     if row is None:
@@ -47,12 +51,15 @@ def get_ticket_by_id(ticket_id):
         "closed": row[9]
     }
 
-def get_tickets_by_status(status, limit, page):
-    return repository.get_tickets_by_status(status)
-
-def get_all_tickets(limit, page):
+def get_all_tickets_by_status(status, sort,  limit, page):
     offset = (page-1) * limit
-    rows = repository.get_all_tickets(limit, offset)
+    sort = allowed_sort.get(sort, "id")
+    return repository.get_tickets_by_status(status, sort,  limit, offset)
+
+def get_all_tickets(limit, page, sort):
+    offset = (page-1) * limit
+    sort = allowed_sort.get(sort, "id")
+    rows = repository.get_all_tickets(limit, offset, sort)
     if not rows:
         return {"information": "Nie ma żadnych ticketów"}
     return[{

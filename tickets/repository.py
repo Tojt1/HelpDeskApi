@@ -47,20 +47,20 @@ def get_ticket(ticket_id):
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
 
-def get_tickets_by_status(status, limit, offset):
+def get_tickets_by_status(status, sort,  limit, offset):
     conn = create_connection()
     with conn.cursor() as cur:
         try:
-            cur.execute("SELECT * FROM tickets WHERE status = %s LIMIT %s OFFSET %s", (status, limit, offset ))
+            cur.execute(f"SELECT * FROM tickets WHERE status = %s ORDER BY {sort}  LIMIT %s OFFSET %s", (status, limit, offset ))
             return cur.fetchall()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
 
-def get_all_tickets(limit, offset):
+def get_all_tickets(limit, offset, sort):
     conn = create_connection()
     with conn.cursor() as cur:
         try:
-            cur.execute("SELECT * FROM tickets LIMIT %s OFFSET %s", (limit, offset))
+            cur.execute(f"SELECT * FROM tickets ORDER BY {sort} DESC LIMIT %s OFFSET %s", (limit, offset))
             return cur.fetchall()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
