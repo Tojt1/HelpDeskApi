@@ -1,7 +1,13 @@
 import psycopg2
-def create_connection():
-    return psycopg2.connect("dbname=HelpDesk user=postgres host=localhost password=2910")
 
+def create_connection():
+    return psycopg2.connect(
+        dbname="HelpDesk",
+        user="postgres",
+        password="2910",
+        host="host.docker.internal",
+        port=5432,
+    )
 def create_tables():
 
     con = create_connection()
