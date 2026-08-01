@@ -22,44 +22,61 @@ def create_comment(ticket_id, comment, user):
 
 def get_all_comments(ticket_id):
     conn = pool.getconn()
-
     with conn.cursor() as cur:
-        cur.execute("SELECT id, content, author_id, created FROM comment WHERE ticket_id = %s",
-                    (ticket_id, ))
-        return cur.fetchall()
+        try:
+            cur.execute("SELECT id, content, author_id, created FROM comment WHERE ticket_id = %s",
+                        (ticket_id, ))
 
-    pool.putconn(conn)
+            return cur.fetchall()
+
+        except Exception:
+            raise exceptions.DbDownloadError("Błą∂ podczas pobierania komentarzy")
+
+        finally:
+            pool.putconn(conn)
 
 def get_comm(comm_id):
     conn = pool.getconn()
     with conn.cursor() as cur:
-        cur.execute("SELECT content, ticket_id, author_id, created FROM comment WHERE id = %s", (comm_id, ))
-        return cur.fetchone()
+        try:
+            cur.execute("SELECT content, ticket_id, author_id, created FROM comment WHERE id = %s", (comm_id, ))
+            return cur.fetchone()
 
-    pool.putconn(conn)
+        except Exception:
+            raise exceptions.DbDownloadError("Błąd podczas pobierania komentarza")
+
+        finally:
+            pool.putconn(conn)
 
 def delete_comm(comm_id):
     conn = pool.getconn()
+
     with conn.cursor() as cur:
         try:
             cur.execute("DELETE FROM tickets WHERE id = %s", (comm_id, ))
             conn.commit()
             return {"information": "Pomyślnie usunięto komentarz"}
-        except exceptions.DbDeleteError:
-            return {"error": "Wystąpił błą∂ podczas usuwania komentarza"}
+
+        except Exception:
+            conn.rollback()
+            raise exceptions.DbDeleteError("Wystąpił błąd podczas usuwania komentarza")
 
         finally:
             pool.putconn(conn)
 
 def update_comm(new_content,comm_id):
     conn = pool.getconn()
+
     with conn.cursor() as cur:
         try:
             cur.execute("UPDATE comment SET content = %s WHERE id = %s", (new_content, comm_id))
             conn.commit()
-            return {"information": "Pomyślnie zaktualizowano komentarz"}
-        except exceptions.DbUpdateError:
-            return {"error": "Wystąpił błą∂ podczas updatowanie komentarza"}
+
+            return True
+
+        except Exception:
+            conn.rollback()
+            raise exceptions.DbUpdateError("Wystąpił błą∂ podczas aktualizacji komentarza")
 
         finally:
             pool.putconn(conn)
