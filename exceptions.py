@@ -18,3 +18,15 @@ class DbUpdateError(Exception):
 
 class DbDeleteError(Exception):
     pass
+
+class DBAssignAgentError(Exception):
+    pass
+
+class DBCehckExistsError(Exception):
+    pass
+
+class CreatinTablesError(Exception):
+    pass
+
+class GetUserIdError(Exception):
+    pass

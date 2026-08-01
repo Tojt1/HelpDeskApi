@@ -52,4 +52,5 @@ def create_tables():
     except Exception:
         con.rollback()
         raise exceptions.CreatinTablesError("Wystąpił błąd podczas tworzenia tabel")
-    pool.putconn(con)
+    finally:
+        pool.putconn(con)
