@@ -5,3 +5,4 @@ bcrypt~=5.0.0
 PyJWT~=2.13.0
 psycopg2-binary~=2.9.12
 uvicorn
+python-dotenv
