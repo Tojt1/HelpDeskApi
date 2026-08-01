@@ -1,4 +1,4 @@
-from database import create_connection
+from database import pool
 import datetime
 import exceptions
 
@@ -6,19 +6,23 @@ import exceptions
 
 
 def db_exists_ticket(ticket_id):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         cur.execute("SELECT title FROM tickets WHERE id =%s", (ticket_id, ))
         return cur.fetchone()
 
+    pool.putconn()
+
 def check_if_ticket_close(ticket_id):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         cur.execute("SELECT status from tickets WHERE id = %s", (ticket_id, ))
         return cur.fetchone()
 
+    pool.putconn()
+
 def assign_agent(ticket_id, user_id):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         try:
             cur.execute("UPDATE tickets SET status ='IN_PROGRESS', agent_id = %s, updated = %s WHERE id = %s", (user_id, datetime.datetime.now(), ticket_id))
@@ -27,8 +31,11 @@ def assign_agent(ticket_id, user_id):
         except exceptions.DbAddError:
             return {"error": "wystąpił błą∂ podczas dodawania agenta"}
 
+        finally:
+            pool.putconn(conn)
+
 def add_ticket(ticket, user_id):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         try:
             cur.execute("INSERT INTO tickets(title, description, priority, category, author_id) VALUES(%s, %s, %s, %s, %s)", (ticket.title, ticket.description, ticket.priority, ticket.category, user_id))
@@ -36,9 +43,11 @@ def add_ticket(ticket, user_id):
             return {"information": "Pomyślnie utworzono ticket"}
         except exceptions.DbAddError:
             return {"error":"podano nieprawidlowoa wartosc"}
+        finally:
+            pool.putconn(conn)
 
 def get_ticket(ticket_id):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         try:
             cur.execute(
@@ -46,21 +55,27 @@ def get_ticket(ticket_id):
             return cur.fetchone()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
+        finally:
+            pool.putconn(conn)
 
 def get_tickets_by_status(status, sort,  limit, offset):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         try:
             cur.execute(f"SELECT * FROM tickets WHERE status = %s ORDER BY {sort}  LIMIT %s OFFSET %s", (status, limit, offset ))
             return cur.fetchall()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
+        finally:
+            pool.putconn(conn)
 
 def get_all_tickets(limit, offset, sort):
-    conn = create_connection()
+    conn = pool.getconn()
     with conn.cursor() as cur:
         try:
             cur.execute(f"SELECT * FROM tickets ORDER BY {sort} DESC LIMIT %s OFFSET %s", (limit, offset))
             return cur.fetchall()
         except exceptions.DbDownloadError:
             return {"error": "wystąpił błąd podczas pobierania danych"}
+        finally:
+            pool.putconn(conn)
