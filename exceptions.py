@@ -30,3 +30,6 @@ class CreatinTablesError(Exception):
 
 class GetUserIdError(Exception):
     pass
+
+class UserLoginError(Exception):
+    pass
