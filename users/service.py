@@ -86,12 +86,15 @@ def decode_token(token):
 
 
 def login_user(user):
-    valid_email(user.email)
-    result = ensuer_email_exists(user.email)
-    if check_password(user.password, result[0]):
-        return create_jwt_toc(result)
-    else:
-        raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
+    try:
+        valid_email(user.email)
+        result = ensuer_email_exists(user.email)
+        if check_password(user.password, result[0]):
+            return create_jwt_toc(result)
+        else:
+            raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
+    except Exception:
+        raise exceptions.UserLoginError("Wystąpił błą∂ podczas logowania użytkownika")
 
 def user_info(token:str):
     user_id = decode_token(token)

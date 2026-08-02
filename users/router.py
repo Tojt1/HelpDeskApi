@@ -1,28 +1,46 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,HTTPException
 from users.schemas import RegisterUser, LoginUser
 import users.service
-
+import exceptions
 router_user = APIRouter()
 
 @router_user.get("/")
 def get_users():
     try:
         return users.service.load_all_users()
-    except ValueError:
-        return {"error":"Nieprawidłowe dane"}, 400
+    except exceptions.DbDownloadError as e :
+        return HTTPException(
+            status_code=400,
+            detail= str(e)
+        )
 
 @router_user.post("/add-user")
 def sign_up(user:RegisterUser):
     try:
         users.service.register_user(user)
         return {"information": "Pomyslnie stworzono użytkownika"}, 200
-    except ValueError:
-        return {"error": "Podano niewłaściwe dane"}, 400
+    except exceptions.DbAddError as e :
+        return HTTPException(
+            status_code=400,
+            detail= str(e)
+        )
 
 @router_user.post("/login")
 def sign_in(user:LoginUser):
-    return users.service.login_user(user)
+    try:
+        return users.service.login_user(user)
+    except exceptions.UserLoginError as e:
+        return HTTPException(
+            status_code=400,
+            detail= str(e)
+        )
 
 @router_user.get("/me")
 def get_user_inf(token: str):
-    return users.service.user_info(token)
+    try:
+        return users.service.user_info(token)
+    except exceptions.DbDownloadError as e:
+        return HTTPException(
+            status_code=400,
+            detail= str(e)
+        )

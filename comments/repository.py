@@ -55,7 +55,7 @@ def delete_comm(comm_id):
         try:
             cur.execute("DELETE FROM tickets WHERE id = %s", (comm_id, ))
             conn.commit()
-            return {"information": "Pomyślnie usunięto komentarz"}
+            return True
 
         except Exception:
             conn.rollback()
