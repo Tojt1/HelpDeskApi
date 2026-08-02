@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from tickets.schem import CreateTicket
+from tickets.schemas import CreateTicket
 from tickets import service
 from typing import Optional
 from users.service import decode_token
