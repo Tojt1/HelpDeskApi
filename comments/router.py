@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from comments.schem import Comment
+from comments.schemas import Comment
 from users.service import decode_token
 import comments.service as service
 import exceptions
