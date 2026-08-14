@@ -1,22 +1,13 @@
-
 import './App.css'
+import ShowTickets from "./components/Tickets.jsx"
+import Login from "./pages/login.jsx";
 
 function App() {
 
   return (
-      <dkv>
-        <p>Hello world</p>
-        <Text display="hello" />
-        <Text display="wojtek"/>
-      </dkv>
-  )
-}
-
-function Text({display}) {
-  return (
-      <div>
-        <p>{display}</p>
-      </div>
+      <>
+         <Login />
+      </>
   )
 }
 
