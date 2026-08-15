@@ -3,10 +3,24 @@ import {useState} from "react";
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loginInfo, setLoginInfo] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        alert(email)
+
+        const response = await fetch("http://localhost:8000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email, password
+            })
+        });
+
+        const data = await response.json();
+
+        setLoginInfo(data);
     }
 
     return(
@@ -26,6 +40,11 @@ function Login(){
                 onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit" className="signin-button">Zaloguj się</button>
             </form>
+            {loginInfo && (
+                <div>
+                    <p>Pomyślnie zalogowano jako: {loginInfo.email}</p>
+                </div>
+            )}
         </div>
     )
 }
