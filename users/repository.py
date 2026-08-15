@@ -57,7 +57,7 @@ def get_all_users():
             raise exceptions.DbDownloadError("Wystąpił błąd podczas pobierania użytkowniowk")
 
         finally:
-            pool.putconn()
+            pool.putconn(conn)
 
 def get_id(email):
     conn = pool.getconn()
