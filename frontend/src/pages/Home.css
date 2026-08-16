@@ -11,7 +11,11 @@
 }
 
 .home-form {
-    width:400px;
+    width:600px;
+    flex-direction:column;
+    display:flex;
+    height: 300px;
+    gap: 15px;
 }
 
 .link-login {
@@ -22,6 +26,17 @@
     text-decoration: none;
     color: white;
 
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.link-register{
+    position: absolute;
+    top: 20px;
+    right: 180px;
+
+    text-decoration: none;
+    color: white;
     border: 1px solid white;
     border-radius: 8px;
 }

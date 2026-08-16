@@ -48,6 +48,7 @@ function Home() {
             <button className="home-btn" type="submit">Wyślij token</button>
         </form>
         <Link to="/login" className="link-login">Zaloguj się</Link>
+        <Link to="/register" className="link-register">zarejestruj się</Link>
     </div>
 }
 
