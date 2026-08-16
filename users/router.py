@@ -14,7 +14,7 @@ def get_users():
             detail= str(e)
         )
 
-@router_user.post("/add-user")
+@router_user.post("/register")
 def sign_up(user:RegisterUser):
     try:
         users.service.register_user(user)

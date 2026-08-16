@@ -32,7 +32,7 @@ function Login(){
     return(
         <div className="login-container">
             <h2>Logowanie</h2>
-            <form onSubmit={handleSubmit} className="login-from">
+            <form onSubmit={handleSubmit} className="login-form">
                 <input
                 type="email"
                 placeholder="Email:"
