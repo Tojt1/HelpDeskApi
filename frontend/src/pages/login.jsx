@@ -1,7 +1,10 @@
 import {useState} from "react";
 import "./login.css"
+import {useNavigate} from "react-router";
 
 function Login(){
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginInfo, setLoginInfo] = useState(null);
@@ -20,8 +23,10 @@ function Login(){
         });
 
         const data = await response.json();
+        localStorage.setItem("token", data.token)
 
-        setLoginInfo(data);
+        alert("Pomyślnie zalogowano")
+        navigate("/")
     }
 
     return(

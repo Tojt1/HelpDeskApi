@@ -1,14 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import "./Home.css"
+import {useNavigate} from "react-router";
 
-const handleSubmit = () => {
-    alert("wyslanoo")
-}
+
 
 function Home() {
-    const [problemTitle, setProblemTitle] = useState("")
-    const [problemDescription, setProblemDescription] = useState("")
+
+    const navigate = useNavigate();
+
+    const [problemTitle, setProblemTitle] = useState("");
+    const [problemDescription, setProblemDescription] = useState("");
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const items = localStorage.getItem("token")
+
+        if(!items){
+            alert("nie ma tokenu")
+            navigate("/login");
+            return;
+        }
+        alert("utworzono token")
+        /// tutaj wyślij token
+}
 
     return <div className="home-container">
         <h2>Witaj, jaki jest twój problem?</h2>
@@ -22,13 +38,14 @@ function Home() {
             onChange={(e) => setProblemTitle((e.target.value))}/>
 
 
-            <p>Opisz swój problem</p>
+            <p className="paragraph-description">Opisz swój problem</p>
             <input
             type="text"
             placeholder="...."
             value={problemDescription}
             onChange={(e) => setProblemDescription(e.target.value)}/>
 
+            <button className="home-btn" type="submit">Wyślij token</button>
         </form>
         <Link to="/login" className="link-login">Zaloguj się</Link>
     </div>
