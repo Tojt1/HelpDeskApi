@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import {Link} from "react-router";
 import "./register.css";
 
 
@@ -60,6 +61,7 @@ function RegisterUser (){
 
                 <button className="register-btn" type="submit"> Zarejestruj sięx</button>
             </form>
+            <Link to="/login" className="link-login">Zaloguj się</Link>
         </div>
     )
 }

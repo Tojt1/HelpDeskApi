@@ -1,6 +1,7 @@
 import {useState} from "react";
 import "./login.css"
 import {useNavigate} from "react-router";
+import {Link} from "react-router";
 
 function Login(){
     const navigate = useNavigate();
@@ -46,6 +47,9 @@ function Login(){
                 onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit" className="signin-button">Zaloguj się</button>
             </form>
+
+            <Link to="/register" className="link-register">Zarejestruj się</Link>
+
             {loginInfo && (
                 <div>
                     <p>Pomyślnie zalogowano jako: {loginInfo.email}</p>
