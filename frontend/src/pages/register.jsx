@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import "./register.css";
 
 
 function RegisterUser (){
@@ -34,8 +35,8 @@ function RegisterUser (){
 
 
     return(
-        <div>
-            <form onSubmit={handleRegister} className="register-container">
+        <div className="register-container">
+            <form onSubmit={handleRegister} className="register-form">
                 <p>Name:</p>
                 <input
                 type="text"
