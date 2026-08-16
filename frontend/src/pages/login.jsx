@@ -1,4 +1,5 @@
 import {useState} from "react";
+import "./login.css"
 
 function Login(){
     const [email, setEmail] = useState("");
@@ -25,8 +26,8 @@ function Login(){
 
     return(
         <div className="login-container">
+            <h2>Logowanie</h2>
             <form onSubmit={handleSubmit} className="login-from">
-                <h2>Logowanie</h2>
                 <input
                 type="email"
                 placeholder="Email:"
