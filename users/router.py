@@ -28,7 +28,7 @@ def sign_up(user:RegisterUser):
 @router_user.post("/login")
 def  sign_in(user:LoginUser):
     try:
-        return users.service.login_user(user)
+        return {"token":users.service.login_user(user)}
     except exceptions.UserLoginError as e:
         return HTTPException(
             status_code=400,
