@@ -1,5 +1,6 @@
-import {useState} from "react";
-import {Link} from "react-router";
+import { useState } from "react";
+import { Link } from "react-router";
+import "./Home.css"
 
 const handleSubmit = () => {
     alert("wyslanoo")
@@ -10,6 +11,8 @@ function Home() {
     const [problemDescription, setProblemDescription] = useState("")
 
     return <div className="home-container">
+        <h2>Witaj, jaki jest twój problem?</h2>
+
         <form onSubmit={handleSubmit} className="home-form">
             <p>Jakigo rodzaju jest twój problem?</p>
             <input
