@@ -11,6 +11,7 @@ function Home() {
 
     const [problemTitle, setProblemTitle] = useState("");
     const [problemDescription, setProblemDescription] = useState("");
+    const [problemCategory, setProblemCategory] = useState("")
 
 
     const handleSubmit = async (e) => {
@@ -22,8 +23,24 @@ function Home() {
             navigate("/login");
             return;
         }
-        alert("utworzono token")
-        /// tutaj wyślij token
+        const token = localStorage.getItem("token")
+
+        const response = await fetch("http://localhost:8000/tickets", {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body:JSON.stringify({
+                title: problemTitle,
+                description: problemDescription,
+                category: problemCategory
+            })
+        })
+        const data = await  response.json()
+
+        console.log("status", response.status)
+        console.log("data", data)
 }
 
     return <div className="home-container">
@@ -44,6 +61,13 @@ function Home() {
             placeholder="...."
             value={problemDescription}
             onChange={(e) => setProblemDescription(e.target.value)}/>
+
+            <p>Z jakiej kategori jest twój błą∂: </p>
+            <input
+            type="text"
+            placeholder="Category...."
+            value={problemCategory}
+            onChange={(e) => setProblemCategory(e.target.value)}/>
 
             <button className="home-btn" type="submit">Wyślij token</button>
         </form>
