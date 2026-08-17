@@ -29,7 +29,7 @@ def create_tables():
                            "title TEXT NOT NULL,"
                            "description TEXT,"
                            "status TEXT CHECK (status IN ('OPEN', 'IN_PROGRESS', 'CLOSED')) DEFAULT 'OPEN' NOT NULL,"
-                           "priority INTEGER, "
+                           "priority INTEGER DEFAULT 3, "
                            "category TEXT,"
                            "author_id INTEGER NOT NULL,"
                            "agent_id INTEGER, "
