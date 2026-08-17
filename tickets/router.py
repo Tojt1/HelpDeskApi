@@ -3,14 +3,17 @@ from tickets.schemas import CreateTicket
 from tickets import service
 from typing import Optional
 from users.service import decode_token
+from authorisation import oauth2
 import exceptions
 
 router_ticket = APIRouter()
 
 @router_ticket.post("/tickets")
-def create_ticket(ticket:CreateTicket, user_d = Depends(decode_token)):
+def create_ticket(ticket:CreateTicket, user_id = Depends(oauth2)):
     try:
-        return service.create_ticket(ticket, user_d)
+        print(ticket)
+        print(user_id)
+        return service.create_ticket(ticket, user_id)
     except exceptions.DbAddError as e:
         return HTTPException(
             status_code=400,

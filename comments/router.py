@@ -8,7 +8,7 @@ comments_router = APIRouter()
 @comments_router.post("/tickets/{ticket_id}/comments")
 def create_comment(ticket_id:int, comment:Comment, user_id = Depends(decode_token)):
     try:
-        return service.add_comment(ticket_id, comment, user_id)
+        return service.add_comment(ticket_id, comment, user_id["id"])
     except exceptions.DbAddError as e:
         return HTTPException(
             status_code=400,

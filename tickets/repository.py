@@ -51,8 +51,8 @@ def add_ticket(ticket, user_id):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("INSERT INTO tickets(title, description, priority, category, author_id) VALUES(%s, %s, %s, %s, %s)",
-                        (ticket.title, ticket.description, ticket.priority, ticket.category, user_id))
+            cur.execute("INSERT INTO tickets(title, description, category, author_id) VALUES(%s, %s, %s, %s)",
+                        (ticket.title, ticket.description, ticket.category, user_id))
             conn.commit()
             return True
 
