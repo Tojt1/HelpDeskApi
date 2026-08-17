@@ -1,6 +1,5 @@
-from tickets.service import check_ticket_is_close, check_ticket_exist
-from users.service import decode_token
-import comments.repository as repository
+from backend.tickets.service import check_ticket_is_close, check_ticket_exist
+import backend.comments.repository as repository
 
 
 

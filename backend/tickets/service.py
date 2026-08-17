@@ -1,5 +1,5 @@
-from users.service import decode_token, check_user_admin
-from tickets import repository
+from backend.users.service import decode_token, check_user_admin
+from backend.tickets import repository
 
 allowed_sort = {
     "id":"id",
@@ -54,7 +54,7 @@ def get_ticket_by_id(ticket_id):
 def get_all_tickets_by_status(status, sort,  limit, page):
     offset = (page-1) * limit
     sort = allowed_sort.get(sort, "id")
-    return repository.get_tickets_by_status(status, sort,  limit, offset)
+    return repository.get_tickets_by_status(status, sort, limit, offset)
 
 def get_all_tickets(limit, page, sort):
     offset = (page-1) * limit

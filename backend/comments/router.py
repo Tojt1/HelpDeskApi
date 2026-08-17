@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from comments.schemas import Comment
-from users.service import decode_token
-import comments.service as service
+from backend.comments.schemas import Comment
+from backend.users.service import decode_token
+import backend.comments.service as service
 import exceptions
 comments_router = APIRouter()
 
