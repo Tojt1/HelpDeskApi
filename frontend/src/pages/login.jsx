@@ -27,7 +27,7 @@ function Login(){
         localStorage.setItem("token", data.token)
 
         alert("Pomyślnie zalogowano")
-        navigate("/")
+        navigate("/dashboard")
     }
 
     return(
