@@ -1,5 +1,5 @@
 import bcrypt
-from users import repository
+from backend.users import repository
 import jwt
 import config
 import exceptions

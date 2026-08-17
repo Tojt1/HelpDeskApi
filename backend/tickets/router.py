@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from tickets.schemas import CreateTicket
-from tickets import service
+from backend.tickets.schemas import CreateTicket
+from backend.tickets import service
 from typing import Optional
-from users.service import decode_token
 from authorisation import oauth2
 import exceptions
 
@@ -26,7 +25,7 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
         if status is None:
             return service.get_all_tickets(limit, page, sort)
         else:
-            return service.get_all_tickets_by_status(status, sort,  limit, page)
+            return service.get_all_tickets_by_status(status, sort, limit, page)
     except exceptions.DbDownloadError as e:
         return HTTPException(
             status_code=400,
