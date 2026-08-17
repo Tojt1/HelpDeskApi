@@ -20,7 +20,7 @@ def check_ticket_exist(ticket_id):
     return True
 
 def assign_agent(ticket_id, jwt_token):
-    user_id = decode_token(jwt_token)
+    user_id = decode_token(jwt_token)["id"]
     if not check_ticket_exist(ticket_id):
         return {"error":"Nie ma takiego ticketu"}
     if not check_user_admin(user_id):
@@ -30,8 +30,8 @@ def assign_agent(ticket_id, jwt_token):
 
     return repository.assign_agent(ticket_id, user_id)
 
-def create_ticket(ticket, user_d):
-    return repository.add_ticket(ticket, user_d)
+def create_ticket(ticket, user_id):
+    return repository.add_ticket(ticket, decode_token(user_id)["id"])
 
 def get_ticket_by_id(ticket_id):
     row = repository.get_ticket(ticket_id)

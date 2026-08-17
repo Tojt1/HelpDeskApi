@@ -59,7 +59,6 @@ def ensuer_email_exists(email):
     return result
 
 
-
 def load_all_users():
     rows = repository.get_all_users()
     return [{
@@ -72,9 +71,11 @@ def load_all_users():
 
 
 
-def create_jwt_toc(id):
+def create_jwt_toc(user, email):
     token = jwt.encode(
-        {"id": id[1]},
+        {"id": user[1],
+         "name": user[2],
+         "email": email},
         config.SECRET_KEY,
         algorithm="HS256"
     )
@@ -82,7 +83,7 @@ def create_jwt_toc(id):
 
 def decode_token(token):
     result = jwt.decode(token, config.SECRET_KEY, algorithms=["HS256"])
-    return result["id"]
+    return result
 
 
 def login_user(user):
@@ -90,7 +91,7 @@ def login_user(user):
         valid_email(user.email)
         result = ensuer_email_exists(user.email)
         if check_password(user.password, result[0]):
-            return create_jwt_toc(result)
+            return create_jwt_toc(result, user.email)
         else:
             raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
     except Exception:

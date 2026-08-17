@@ -5,7 +5,7 @@ from users.service import decode_token
 
 class Test_Comments:
     client = TestClient(app)
-    app.dependency_overrides[decode_token] = lambda:8
+    app.dependency_overrides[decode_token["id"]] = lambda:8
 
     def test_get_all_coemments(self):
         response = self.client.get("/tickets/4/comments")
