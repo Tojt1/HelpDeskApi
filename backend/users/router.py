@@ -30,6 +30,11 @@ def sign_up(user:RegisterUser):
             status_code=400,
             detail="Wystąpił błąd podczas tworzenia użytkownika"
         )
+    except exceptions.InvalidPasswordError:
+        raise HTTPException(
+            status_code=400,
+            detail="Podano nieprawidłowe hasło"
+        )
 
 @router_user.post("/login")
 def  sign_in(user:LoginUser):

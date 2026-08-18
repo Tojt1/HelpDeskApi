@@ -14,6 +14,9 @@ def register_user(user):
     except exceptions.UserAlreadyExistsError:
         raise
 
+    except exceptions.InvalidPasswordError:
+        raise
+
     except Exception as e:
         print("Błą∂", e)
         raise exceptions.UserRegisterError("Wystąpił błąd podczas tworzenia konta")
@@ -23,7 +26,7 @@ def valid_password(password):
     found = False
 
     if len(password) < 8:
-        raise ValueError("Hasło musi być dłższe niż 8 znaków")
+        raise exceptions.InvalidPasswordError("Hasło musi być dłższe niż 8 znaków")
 
     for char in password:
         if char in special_chars:
@@ -31,7 +34,7 @@ def valid_password(password):
             break
 
     if not found:
-        raise ValueError("Hasło nie posiada znaku specjalnego")
+        raise exceptions.InvalidPasswordError("Hasło nie posiada znaku specjalnego")
 
     return None
 
