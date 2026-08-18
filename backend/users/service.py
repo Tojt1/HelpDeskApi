@@ -10,8 +10,13 @@ def register_user(user):
         valid_password(user.password)
         hashed_password = hash_password(user.password)
         repository.create_user(user, hashed_password)
-    except:
-        raise ValueError("Wystąpił błąd podczas logowania")
+
+    except exceptions.UserAlreadyExistsError:
+        raise
+
+    except Exception as e:
+        print("Błą∂", e)
+        raise exceptions.UserRegisterError("Wystąpił błąd podczas tworzenia konta")
 
 def valid_password(password):
     special_chars = "!@#$%^&*()_+-=[]{}|;':\",.<>/?"

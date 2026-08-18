@@ -17,12 +17,18 @@ def get_users():
 @router_user.post("/register")
 def sign_up(user:RegisterUser):
     try:
+        print("1")
         backend.users.service.register_user(user)
         return {"information": "Pomyslnie stworzono użytkownika"}, 200
-    except exceptions.DbAddError as e :
-        return HTTPException(
+    except exceptions.UserAlreadyExistsError:
+        raise HTTPException(
             status_code=400,
-            detail= str(e)
+            detail="Ten email jest już zajęty"
+        )
+    except exceptions.DbAddError:
+        raise HTTPException(
+            status_code=400,
+            detail="Wystąpił błąd podczas tworzenia użytkownika"
         )
 
 @router_user.post("/login")
