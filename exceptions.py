@@ -33,3 +33,6 @@ class GetUserIdError(Exception):
 
 class UserLoginError(Exception):
     pass
+
+class UserRegisterError(Exception):
+    pass

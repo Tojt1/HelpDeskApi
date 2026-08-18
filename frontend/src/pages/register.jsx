@@ -10,9 +10,12 @@ function RegisterUser (){
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [registerError, setRegisterError] = useState("")
 
     const handleRegister = async (e) => {
         e.preventDefault()
+
+        setRegisterError("")
 
         try {
             const response = await fetch("http://localhost:8000/register", {
@@ -23,14 +26,20 @@ function RegisterUser (){
                 body: JSON.stringify({
                     name, email, password
                 })
+
             });
-
             const data = await response.json();
-            alert("Pomyślnie utworzono konto")
+            if (response.ok) {
+                alert("Pomyślnie utworzono konto")
+                navigate("/login")
+            } else{
+                setRegisterError(data.detail)
+            }
 
-            navigate("/login")
-        } catch(error){
-            console.log(error)
+
+        }
+        catch(error){
+            setRegisterError(error)
         }
     }
 
@@ -61,6 +70,11 @@ function RegisterUser (){
 
                 <button className="register-btn" type="submit"> Zarejestruj sięx</button>
             </form>
+            {registerError &&(
+                <div>
+                    <p>Wystąpił błąd podczas rejestracji: {registerError}</p>
+                </div>
+            )}
             <Link to="/login" className="link-login">Zaloguj się</Link>
         </div>
     )
