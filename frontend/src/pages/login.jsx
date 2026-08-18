@@ -9,25 +9,36 @@ function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginInfo, setLoginInfo] = useState(null);
+    const [loginError, setLoginError] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const response = await fetch("http://localhost:8000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email, password
-            })
-        });
+        setLoginError("")
 
-        const data = await response.json();
-        localStorage.setItem("token", data.token)
+        try{
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email, password
+                })
+            });
+            const data = await response.json();
+            if (!response.ok){
+                setLoginError(data.detail || "Niepoprawny email lub hasło")
+            } else {
+            localStorage.setItem("token", data.token)
 
-        alert("Pomyślnie zalogowano")
-        navigate("/dashboard")
+            alert("Pomyślnie zalogowano")
+            navigate("/dashboard")
+                }
+        }
+        catch (error){
+            setLoginError("Nieudało się połączyć z serwerem")
+        }
     }
 
     return(
@@ -50,9 +61,9 @@ function Login(){
 
             <Link to="/register" className="link-register">Zarejestruj się</Link>
 
-            {loginInfo && (
+            {loginError && (
                 <div>
-                    <p>Pomyślnie zalogowano jako: {loginInfo.email}</p>
+                    <p>Wystąpił błąd podczas logowania: {loginError}</p>
                 </div>
             )}
         </div>

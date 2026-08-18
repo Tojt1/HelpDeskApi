@@ -38,7 +38,9 @@ def check_user_password(email):
     with conn.cursor() as cur:
         try:
             cur.execute("SELECT password, id, name FROM users WHERE email = %s", (email,))
-            return cur.fetchone()
+            res = cur.fetchone()
+
+            return res
 
         except Exception:
             raise exceptions.DBCehckExistsError("Wystąpił błąd podczas sprawdzania hasła użytkownika")

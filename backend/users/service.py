@@ -6,7 +6,6 @@ import exceptions
 
 def register_user(user):
     try:
-        valid_email(user.email)
         ensuer_email_not_exists(user.email)
         valid_password(user.password)
         hashed_password = hash_password(user.password)
@@ -42,9 +41,6 @@ def check_password(password:str, hashed_password:str) ->bool:
     bpassword = password.encode("utf-8")
     return bcrypt.checkpw(bpassword, hashed_password.encode("utf-8"))
 
-def valid_email(email:str):
-    if "@" not in email:
-        return {"error": "email jest nieprawidłowy"}
 
 def ensuer_email_not_exists(email):
     result = repository.check_user_email(email)
@@ -88,13 +84,14 @@ def decode_token(token):
 
 def login_user(user):
     try:
-        valid_email(user.email)
         result = ensuer_email_exists(user.email)
         if check_password(user.password, result[0]):
             return create_jwt_toc(result, user.email)
         else:
             raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
-    except Exception:
+
+    except Exception as e:
+        print("Błą∂", e)
         raise exceptions.UserLoginError("Wystąpił błą∂ podczas logowania użytkownika")
 
 def user_info(token:str):
