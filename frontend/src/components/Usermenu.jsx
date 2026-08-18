@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import "./Usermenu.css"
 
 function Usermenu(){
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ function Usermenu(){
 
     return (
         <div className="user-container">
-            <button onClick={() => setOpen(!open)}>👤</button>
+            <button onClick={() => setOpen(!open)} className="avatar">👤</button>
 
             {open && (
                 <div className="dropdown">
