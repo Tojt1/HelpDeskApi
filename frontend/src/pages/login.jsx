@@ -62,7 +62,7 @@ function Login(){
             <Link to="/register" className="link-register">Zarejestruj się</Link>
 
             {loginError && (
-                <div>
+                <div className="login-error">
                     <p>Wystąpił błąd podczas logowania: {loginError}</p>
                 </div>
             )}

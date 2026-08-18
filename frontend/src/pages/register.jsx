@@ -71,7 +71,7 @@ function RegisterUser (){
                 <button className="register-btn" type="submit"> Zarejestruj sięx</button>
             </form>
             {registerError &&(
-                <div>
+                <div className="register-error">
                     <p>Wystąpił błąd podczas rejestracji: {registerError}</p>
                 </div>
             )}
