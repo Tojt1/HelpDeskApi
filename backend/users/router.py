@@ -28,11 +28,21 @@ def sign_up(user:RegisterUser):
 @router_user.post("/login")
 def  sign_in(user:LoginUser):
     try:
-        return {"token": backend.users.service.login_user(user)}
-    except exceptions.UserLoginError as e:
-        return HTTPException(
+        return backend.users.service.login_user(user)
+    except exceptions.InvalidPasswordError:
+        raise HTTPException(
+            status_code=401,
+            detail= "Podano nieprawidłowe hasło"
+        )
+    except exceptions.EmaildoesnotExistsError:
+        raise HTTPException(
+            status_code=404,
+            detail="NIe znaleziono takiego użytkownika"
+        )
+    except exceptions.UserLoginError:
+        raise HTTPException(
             status_code=400,
-            detail= str(e)
+            detail="Podano nieprawidłowy email lub hasło"
         )
 
 @router_user.get("/me")

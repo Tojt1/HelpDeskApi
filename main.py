@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from users.router import router_user
+from backend.users.router import router_user
 from database import create_tables
-from tickets.router import router_ticket
-from comments.router import comments_router
+from backend.tickets.router import router_ticket
+from backend.comments.router import comments_router
 from fastapi.middleware.cors import CORSMiddleware
 
 create_tables()

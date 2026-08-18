@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
-from users.service import decode_token
+from backend.users.service import decode_token
 
 class Test_tickets:
     client = TestClient(app)
