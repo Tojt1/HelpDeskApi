@@ -37,10 +37,7 @@ function Home() {
                 category: problemCategory
             })
         })
-        const data = await  response.json()
 
-        console.log("status", response.status)
-        console.log("data", data)
 }
 
     return <div className="home-container">
@@ -69,7 +66,7 @@ function Home() {
             value={problemCategory}
             onChange={(e) => setProblemCategory(e.target.value)}/>
 
-            <button className="home-btn" type="submit">Wyślij token</button>
+            <button className="home-btn" type="submit">Wyślij ticket</button>
         </form>
         <Link to="/login" className="link-login">Zaloguj się</Link>
         <Link to="/register" className="link-register">zarejestruj się</Link>
