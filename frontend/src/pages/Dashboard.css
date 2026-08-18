@@ -1,0 +1,27 @@
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 100vh;
+}
+
+.dasboard-container h2{
+    position: absolute;
+    top: 70px;
+    left: 690px;
+}
+
+
+.dashboard-form{
+    position: absolute;
+    width:600px;
+    flex-direction:column;
+    display:flex;
+    height: 300px;
+    gap: 15px;
+
+    left: 450px;
+    top: 200px;
+}
