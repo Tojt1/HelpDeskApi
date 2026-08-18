@@ -94,7 +94,7 @@ def login_user(user):
     try:
         result = ensuer_email_exists(user.email)
         if check_password(user.password, result[0]):
-            return create_jwt_toc(result, user.email)
+            return {"token":create_jwt_toc(result, user.email)}
         else:
             raise exceptions.InvalidPasswordError("Podano niepoprawne hasło")
 
