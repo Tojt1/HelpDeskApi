@@ -102,9 +102,9 @@ def login_user(user):
         print("Błą∂", e)
         raise exceptions.UserLoginError("Wystąpił błą∂ podczas logowania użytkownika")
 
-def user_info(token:str):
+def user_info(token):
     user_id = decode_token(token)
-    user = repository.download_user_info(user_id)
+    user = repository.download_user_info(user_id["id"])
     return {
         "name":user[0],
         "email": user[1],
