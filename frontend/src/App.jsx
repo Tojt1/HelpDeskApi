@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import RegisterUser from "./pages/register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CheckLogged from "./components/CheckLogged.jsx";
+import Settings from "./pages/Settings.jsx";
 import { Routes, Route} from "react-router";
 
 function App() {
@@ -18,6 +19,11 @@ function App() {
                   <Dashboard />
               </ CheckLogged>
               } />
+          <Route path="/me" element={
+              <CheckLogged>
+                  <Settings />
+              </CheckLogged>
+          }/>
       </Routes>
   )
 }

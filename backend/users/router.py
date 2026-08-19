@@ -1,7 +1,8 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,HTTPException, Depends
 from backend.users.schemas import RegisterUser, LoginUser
 import backend.users.service
 import exceptions
+from authorisation import oauth2
 router_user = APIRouter()
 
 @router_user.get("/")
@@ -57,7 +58,7 @@ def  sign_in(user:LoginUser):
         )
 
 @router_user.get("/me")
-def get_user_inf(token: str):
+def get_user_inf(token = Depends(oauth2)):
     try:
         return backend.users.service.user_info(token)
     except exceptions.DbDownloadError as e:
