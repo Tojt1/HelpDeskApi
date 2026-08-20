@@ -1,6 +1,8 @@
 import {useEffect} from "react";
+import {useState} from "react";
 
 function Settings (){
+    const [informations, setInformations] = useState([])
     useEffect(()=> {
         const token = localStorage.getItem("token")
 
@@ -11,12 +13,22 @@ function Settings (){
                 }
             })
 
-            const data = respose.json()
-            console.log(data)
+            const data = await respose.json()
+            setInformations(data)
         }
         getData();
     }
     , [])
+
+    return(
+        <>
+            <p>{informations.name}</p>
+            <button className="change-name">Change</button>
+            <p>{informations.email}</p>
+            <button className="change-email">change</button>
+            <p>{informations.created}</p>
+        </>
+    )
 }
 
 export default Settings

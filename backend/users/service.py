@@ -106,6 +106,7 @@ def user_info(token):
     user_id = decode_token(token)
     user = repository.download_user_info(user_id["id"])
     return {
+        "id": user_id["id"],
         "name":user[0],
         "email": user[1],
         "role": user[2],
