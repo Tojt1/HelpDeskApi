@@ -11,6 +11,19 @@
 
 .modal {
     background: white;
+
     padding: 30px;
     border-radius: 10px;
+
+    width: 400px;
+    min-height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.modal h2{
+    color: black;
 }
