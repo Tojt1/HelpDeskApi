@@ -6,21 +6,24 @@ function ChangeEmail(){
 
 
     return (
-        <div className="model-bacground"
-             onClick={() => setOpen(false)}
-        >
-            <div className="model"
-                 onClick={(e) => e.stopPropagation()}
-            >
-                <button onClick={() => setOpen(true)}>Zmień</button>
+        <>
+            <button onClick={() => setOpen(true)}>Zmień</button>
 
-                {open && (
-                    <div>
-                        <h2>change email</h2>
-                    </div>
-                )}
+            {open && (
+            <div className="modal-background "
+                 onClick={() => setOpen(false)}
+            >
+                <div className="modal"
+                     onClick={(e) => e.stopPropagation()}
+                >
+                    <button onClick={() => setOpen(true)}>Zmień</button>
+
+                    <h2>Hello</h2>
+                </div>
+
             </div>
-        </div>
+            )}
+        </>
     )
 }
 
