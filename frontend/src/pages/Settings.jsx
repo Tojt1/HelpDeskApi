@@ -1,8 +1,10 @@
 import {useEffect} from "react";
 import {useState} from "react";
+import ChangeEmail from "../components/ChangeEmail.jsx";
 
 function Settings (){
     const [informations, setInformations] = useState([])
+
     useEffect(()=> {
         const token = localStorage.getItem("token")
 
@@ -23,7 +25,7 @@ function Settings (){
     return(
         <>
             <p>{informations.name}</p>
-            <button className="change-name">Change</button>
+            <ChangeEmail />
             <p>{informations.email}</p>
             <button className="change-email">change</button>
             <p>{informations.created}</p>
