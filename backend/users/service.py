@@ -118,3 +118,17 @@ def check_user_admin(user_id)->bool:
     if repository.get_user_role(user_id)[0] == "ADMIN":
         return True
     return False
+
+def change_email(new_email, token):
+    try:
+        user = decode_token(token)
+        user_email = user["email"]
+        ensuer_email_not_exists(user_email)
+        if user_email == new_email:
+            raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
+
+        repository.change_email(user["id"], new_email)
+
+    except Exception as e:
+        print("Error", e)
+        raise exceptions.ChangeEmailError("Wystąpił błą∂ podczas zmiany emailu")
