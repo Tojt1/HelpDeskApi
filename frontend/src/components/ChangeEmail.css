@@ -27,3 +27,9 @@
 .modal h2{
     color: black;
 }
+
+.modal p{
+    color:black;
+    display: flex;
+    font-size: 16px;
+}
