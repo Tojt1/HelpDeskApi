@@ -103,5 +103,19 @@ def get_user_role(user_id):
         finally:
             pool.putconn(conn)
 
+def change_email(user_id, new_email):
+    conn = pool.getconn()
+
+    with conn.cursor as cur:
+        try:
+            cur.execute("UPDATE users SET email = %s WHERE id = %s ", (new_email, user_id))
+            conn.commit()
+            return True
+        except Exception as e:
+            print("Error: ", e)
+            raise exceptions.ChangeEmailError("Wystąpił błąd podczas zmiany e-maila")
+
+        finally:
+            pool.putconn(conn)
 
 

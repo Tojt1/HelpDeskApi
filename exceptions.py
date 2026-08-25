@@ -36,3 +36,9 @@ class UserLoginError(Exception):
 
 class UserRegisterError(Exception):
     pass
+
+class EmailisCurrentlyUseError(Exception):
+    pass
+
+class ChangeEmailError(Exception):
+    pass
