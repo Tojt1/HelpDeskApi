@@ -72,6 +72,19 @@ def change_email(new_email: ChangeEmail , token = Depends(oauth2)):
     try:
         backend.users.service.change_email(new_email, token)
         return {"information": "Pomyślnie zmieniono email"}, 200
+
+    except exceptions.ChangeEmailError:
+        raise HTTPException(
+            status_code=400,
+            detail = "Wystąpił błąd podczas zmieniania e-maila"
+        )
+
+    except exceptions.EmailisCurrentlyUseError:
+        raise HTTPException(
+            status_code=400,
+            detail="This email is currently used"
+        )
+
     except Exception:
         raise HTTPException(
             status_code=400,

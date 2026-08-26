@@ -5,9 +5,12 @@ function ChangeEmail(){
     const [open, setOpen] = useState(false)
     const [currentEmail, setCurrentEmail] = useState("")
     const [newEmail, setNewEmail] = useState("")
+    const [error, setError] = useState(null)
 
     const handdleChangeEmail = async (e) => {
         e.preventDefault()
+
+        setError(null)
 
         const token = localStorage.getItem("token")
 
@@ -27,7 +30,7 @@ function ChangeEmail(){
             alert("Pomyślnie zmieniono email")
         }
         else{
-            console.log(data.detail)
+            setError(data.detail)
         }
     }
 
@@ -61,6 +64,11 @@ function ChangeEmail(){
 
                     <button onClick={handdleChangeEmail}>Zmień</button>
 
+                    {error &&(
+                        <div className="show-error">
+                            <p>Wystąpił błąd podczas zmieniania emailu: {error} </p>
+                        </div>
+                    )}
                 </div>
 
             </div>
