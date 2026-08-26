@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {useState} from "react";
 import ChangeEmail from "../components/ChangeEmail.jsx";
 import ChangePassword from "../components/ChangePassword.jsx";
+import "./Settings.css"
 
 function Settings (){
     const [informations, setInformations] = useState([])
@@ -24,13 +25,23 @@ function Settings (){
     , [])
 
     return(
-        <>
+        <div className="setting-container">
+
+            <div className="setting-row">
             <p>{informations.name}</p>
             <ChangeEmail />
+            </div>
+
+            <div className="setting-row">
             <p>{informations.email}</p>
             <ChangePassword />
+            </div>
+
+            <div className="setting-row">
             <p>{informations.created}</p>
-        </>
+            </div>
+
+        </div>
     )
 }
 
