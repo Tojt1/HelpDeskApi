@@ -124,6 +124,8 @@ def change_email(data, token):
         user = decode_token(token)
         user_email = user["email"]
         ensuer_email_not_exists(data.new_email)
+        if user_email != data.old_email:
+            raise exceptions.DiffrentEmailError("Podałeś ten sam email")
         if user_email == data.new_email:
             raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
 

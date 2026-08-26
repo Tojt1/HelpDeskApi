@@ -85,6 +85,12 @@ def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
             detail="This email is currently used"
         )
 
+    except exceptions.DiffrentEmailError:
+        raise HTTPException(
+            status_code=400,
+            detail="Podałeś zły e-mail"
+        )
+
     except Exception:
         raise HTTPException(
             status_code=400,

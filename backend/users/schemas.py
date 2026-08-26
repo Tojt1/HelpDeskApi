@@ -11,3 +11,4 @@ class LoginUser(BaseModel):
 
 class ChangeEmail(BaseModel):
     new_email: str
+    old_email: str
