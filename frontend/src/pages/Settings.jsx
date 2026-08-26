@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {useState} from "react";
 import ChangeEmail from "../components/ChangeEmail.jsx";
+import ChangePassword from "../components/ChangePassword.jsx";
 
 function Settings (){
     const [informations, setInformations] = useState([])
@@ -27,7 +28,7 @@ function Settings (){
             <p>{informations.name}</p>
             <ChangeEmail />
             <p>{informations.email}</p>
-            <button className="change-email">change</button>
+            <ChangePassword />
             <p>{informations.created}</p>
         </>
     )
