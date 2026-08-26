@@ -68,7 +68,7 @@ def get_user_inf(token = Depends(oauth2)):
         )
 
 @router_user.patch("/me/email")
-def change_email(new_email: ChangeEmail , token = Depends(oauth2)):
+def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
     try:
         backend.users.service.change_email(new_email, token)
         return {"information": "Pomyślnie zmieniono email"}, 200
@@ -90,3 +90,7 @@ def change_email(new_email: ChangeEmail , token = Depends(oauth2)):
             status_code=400,
             detail="Nie udalo sie zmienic e-meila"
         )
+
+@router_user.patch("/me/password")
+def change_user_password():
+    pass
