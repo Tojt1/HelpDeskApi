@@ -27,6 +27,7 @@ function Login(){
                 })
             });
             const data = await response.json();
+            console.log(data.detail)
             if (!response.ok){
                 setLoginError(data.detail || "Niepoprawny email lub hasło")
             } else {

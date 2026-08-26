@@ -1,5 +1,5 @@
 from fastapi import APIRouter,HTTPException, Depends
-from backend.users.schemas import RegisterUser, LoginUser
+from backend.users.schemas import RegisterUser, LoginUser, ChangeEmail
 import backend.users.service
 import exceptions
 from authorisation import oauth2
@@ -68,7 +68,7 @@ def get_user_inf(token = Depends(oauth2)):
         )
 
 @router_user.patch("/me/email")
-def change_email(new_email, token = Depends(oauth2)):
+def change_email(new_email: ChangeEmail , token = Depends(oauth2)):
     try:
         backend.users.service.change_email(new_email, token)
         return {"information": "Pomyślnie zmieniono email"}, 200

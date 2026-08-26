@@ -119,16 +119,16 @@ def check_user_admin(user_id)->bool:
         return True
     return False
 
-def change_email(new_email, token):
+def change_email(data, token):
     try:
         user = decode_token(token)
         user_email = user["email"]
-        ensuer_email_not_exists(user_email)
-        if user_email == new_email:
+        ensuer_email_not_exists(data.new_email)
+        if user_email == data.new_email:
             raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
 
-        repository.change_email(user["id"], new_email)
+        repository.change_email(user["id"], data.new_email)
 
     except Exception as e:
         print("Error", e)
-        raise exceptions.ChangeEmailError("Wystąpił błą∂ podczas zmiany emailu")
+        raise exceptions.ChangeEmailError("Wystąpił błąd podczas zmiany emailu")

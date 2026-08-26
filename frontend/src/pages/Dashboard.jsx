@@ -18,7 +18,7 @@ function Dashboard(){
         const response = await fetch("http://localhost:8000/tickets", {
             method: "POST",
             headers: {
-                "Content-Ype": "application/json",
+                "Content-Type": "application/json",
                 "Authorisation": `Bearer ${token}`
             },
             body:JSON.stringify({
