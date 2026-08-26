@@ -42,3 +42,6 @@ class EmailisCurrentlyUseError(Exception):
 
 class ChangeEmailError(Exception):
     pass
+
+class DiffrentEmailError(Exception):
+    pass

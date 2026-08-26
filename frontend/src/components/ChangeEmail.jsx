@@ -21,6 +21,7 @@ function ChangeEmail(){
                 "Authorization":`Bearer ${token}`
             },
             body: JSON.stringify({
+                old_email: currentEmail,
                 new_email: newEmail
             })
         })
