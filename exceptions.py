@@ -51,3 +51,6 @@ class ThisSamePasswordError(Exception):
 
 class NotTheSamePasswordError(Exception):
     pass
+
+class ChangePasswordError(Exception):
+    pass
