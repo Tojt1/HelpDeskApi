@@ -127,8 +127,12 @@ def changePassword(new_password, user_id):
             cur.execute("UPDATE users SET password =%s WHERE id = %s", (new_password, user_id))
             # conn.commit()
 
-        except Exception:
-            print("e")
+        except Exception as e:
+            print("Error: ", e)
+            assert exceptions.ChangePasswordError("Wystąpił błąd podczas zmiany hasła")
+
+        finally:
+            pool.putconn(conn)
 
 
 

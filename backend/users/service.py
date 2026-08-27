@@ -137,20 +137,25 @@ def change_email(data, token):
 
 
 def change_password(data, token):
-    user = decode_token(token)
-    valid_password(data.new_password)
+    try:
+        user = decode_token(token)
+        valid_password(data.new_password)
 
-    if data.new_password == data.old_password:
-        raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
+        if data.new_password == data.old_password:
+            raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
 
-    user_inf = repository.check_user_password(user["email"])
+        user_inf = repository.check_user_password(user["email"])
 
-    if not check_password(data.old_password, user_inf[0]):
-        raise exceptions.NotTheSamePasswordError("Podano nieprawidłowe hasło")
-    if check_password(data.new_password, user_inf[0]):
-        raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
+        if not check_password(data.old_password, user_inf[0]):
+            raise exceptions.NotTheSamePasswordError("Podano nieprawidłowe hasło")
+        if check_password(data.new_password, user_inf[0]):
+            raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
 
-    hashed_password = hash_password(data.new_password)
+        hashed_password = hash_password(data.new_password)
 
-    repository.changePassword(hashed_password, user_inf[1])
+        repository.changePassword(hashed_password, user_inf[1])
+
+    except Exception as e:
+        print("Error: ", e)
+        raise exceptions.ChangePasswordError("Wystąpił błąd podczas zmiany hasła")
 
