@@ -14,7 +14,7 @@ def create_ticket(ticket:CreateTicket, user_id = Depends(oauth2)):
         print(user_id)
         return service.create_ticket(ticket, user_id)
     except exceptions.DbAddError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail= str(e)
         )
@@ -27,17 +27,20 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
         else:
             return service.get_all_tickets_by_status(status, sort, limit, page)
     except exceptions.DbDownloadError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail=str(e)
         )
+@router_ticket.get("/tickets/{user_id")
+def get_ticket_by_user(user_id:int):
+    return service.get_tickets_by_user(user_id)
 
 @router_ticket.get("/tickets/{ticket_id}")
 def get_ticket_by_id(ticket_id:int):
     try:
         return service.get_ticket_by_id(ticket_id)
     except exceptions.DbDownloadError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail= str(e)
         )
@@ -47,7 +50,7 @@ def assign_agent(ticket_id:int, jwt_code):
     try:
         return service.assign_agent(ticket_id, jwt_code)
     except exceptions.DBAssignAgentError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail= str(e)
         )

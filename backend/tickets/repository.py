@@ -104,3 +104,17 @@ def get_all_tickets(limit, offset, sort):
 
         finally:
             pool.putconn(conn)
+
+def get_tickets_by_user(user_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("SELECT title, description, status, priority, category, created FROM tickets WHERE author_id = %s", (user_id, ))
+            return cur.fetchall()
+
+        except Exception as e:
+            print("Error", e)
+
+        finally:
+            pool.putconn(conn)

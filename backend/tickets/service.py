@@ -1,3 +1,4 @@
+import exceptions
 from backend.users.service import decode_token, check_user_admin
 from backend.tickets import repository
 
@@ -76,3 +77,11 @@ def get_all_tickets(limit, page, sort):
     }
         for row in rows
     ]
+
+def get_tickets_by_user(user_id):
+    try:
+        return repository.get_tickets_by_user(user_id)
+
+    except Exception as e:
+        print("Error", e)
+        raise exceptions.DbDownloadError("Wystąpił  błąd pocxas pobierania ticketów")
