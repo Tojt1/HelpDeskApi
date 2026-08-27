@@ -1,9 +1,9 @@
 # HelpDesk API
 
-Jest to projekt w którym użytkownik może utworzyć ticket z problemem,
-natomiast administrator może przypisać się do tego ticketu aż nie zostanie on zakońcxzony
+**Jest to projekt w którym użytkownik może utworzyć ticket z problemem,
+natomiast administrator może przypisać się do tego ticketu aż nie zostanie on zakońcxzony**
 
-## Funkcjonalność
+##  📝Funkcjonalność
 
 - Rejestracja użytkownika
 - Twordzenie tokenów JWT
@@ -17,7 +17,7 @@ natomiast administrator może przypisać się do tego ticketu aż nie zostanie o
 - Docker
 - Test
 
-## Technologie
+## 💡Technologie
 
  - Python
  - FastApi
@@ -28,17 +28,7 @@ natomiast administrator może przypisać się do tego ticketu aż nie zostanie o
  - Docker
  - Pytest
 
-## Architektura projektu
 
-app/  
-comments/  
-test/  
-tickets/  
-users/  
-config.py  
-databes.py  
-exceptions.py  
-main.py  
 
 **Projekt zosał podzielony na warstwy**  
 repository.py  
@@ -46,11 +36,7 @@ router.py
 schemas.py  
 service.py  
 
-## Digram basy
 
-USERS  
-| - Tickets  
-| -------|------Comments
 
 ## Endpointy
 | GET | `/` | Get all users |  
@@ -66,4 +52,11 @@ USERS
 | GET | `/tickets/{ticket_id}/comments/{comment_id}`| get comment|  
 |DELETE| `/tickets/{ticket_id}/comments/{comment_od}`| delet comment|  
 |PATCH| `/tickets/{ticket_id}/comments/{comment_id}`| change comment_content|
+
+
+## 📖 Czego nauczył mnie ten projekt?
+ - Fastapi
+ - Krud
+ - docker
+ - react
 
