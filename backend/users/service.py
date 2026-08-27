@@ -129,8 +129,28 @@ def change_email(data, token):
         if user_email == data.new_email:
             raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
 
-        repository.change_email(user["id"], data.new_email)
+        repository.changeEmail(user["id"], data.new_email)
 
     except Exception as e:
         print("Error", e)
         raise exceptions.ChangeEmailError("Wystąpił błąd podczas zmiany emailu")
+
+
+def change_password(data, token):
+    user = decode_token(token)
+    valid_password(data.new_password)
+
+    if data.new_password == data.old_password:
+        raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
+
+    user_inf = repository.check_user_password(user["email"])
+
+    if not check_password(data.old_password, user_inf[0]):
+        raise exceptions.NotTheSamePasswordError("Podano nieprawidłowe hasło")
+    if check_password(data.new_password, user_inf[0]):
+        raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
+
+    hashed_password = hash_password(data.new_password)
+
+    repository.changePassword(hashed_password, user_inf[1])
+

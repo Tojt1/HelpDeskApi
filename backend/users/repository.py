@@ -103,13 +103,13 @@ def get_user_role(user_id):
         finally:
             pool.putconn(conn)
 
-def change_email(user_id, new_email):
+def changeEmail(user_id, new_email):
     conn = pool.getconn()
 
     with conn.cursor() as cur:
         try:
             cur.execute("UPDATE users SET email = %s WHERE id = %s ", (new_email, user_id))
-            # conn.commit()
+            conn.commit()
             return True
         except Exception as e:
             print("Error: ", e)
@@ -117,5 +117,19 @@ def change_email(user_id, new_email):
 
         finally:
             pool.putconn(conn)
+
+
+def changePassword(new_password, user_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("UPDATE users SET password =%s WHERE id = %s", (new_password, user_id))
+            # conn.commit()
+
+        except Exception:
+            print("e")
+
+
 
 
