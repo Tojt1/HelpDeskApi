@@ -45,3 +45,9 @@ class ChangeEmailError(Exception):
 
 class DiffrentEmailError(Exception):
     pass
+
+class ThisSamePasswordError(Exception):
+    pass
+
+class NotTheSamePasswordError(Exception):
+    pass

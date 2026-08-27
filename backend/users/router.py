@@ -1,6 +1,6 @@
 from fastapi import APIRouter,HTTPException, Depends
-from backend.users.schemas import RegisterUser, LoginUser, ChangeEmail
-import backend.users.service
+from backend.users.schemas import RegisterUser, LoginUser, ChangeEmail, ChangePassword
+import backend.users.service as service
 import exceptions
 from authorisation import oauth2
 router_user = APIRouter()
@@ -8,7 +8,7 @@ router_user = APIRouter()
 @router_user.get("/")
 def get_users():
     try:
-        return backend.users.service.load_all_users()
+        return service.load_all_users()
     except exceptions.DbDownloadError as e :
         return HTTPException(
             status_code=400,
@@ -19,7 +19,7 @@ def get_users():
 def sign_up(user:RegisterUser):
     try:
         print("1")
-        backend.users.service.register_user(user)
+        service.register_user(user)
         return {"information": "Pomyslnie stworzono użytkownika"}, 200
     except exceptions.UserAlreadyExistsError:
         raise HTTPException(
@@ -40,7 +40,7 @@ def sign_up(user:RegisterUser):
 @router_user.post("/login")
 def  sign_in(user:LoginUser):
     try:
-        return backend.users.service.login_user(user)
+        return service.login_user(user)
     except exceptions.InvalidPasswordError:
         raise HTTPException(
             status_code=401,
@@ -60,7 +60,7 @@ def  sign_in(user:LoginUser):
 @router_user.get("/me")
 def get_user_inf(token = Depends(oauth2)):
     try:
-        return backend.users.service.user_info(token)
+        return service.user_info(token)
     except exceptions.DbDownloadError as e:
         return HTTPException(
             status_code=400,
@@ -70,7 +70,7 @@ def get_user_inf(token = Depends(oauth2)):
 @router_user.patch("/me/email")
 def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
     try:
-        backend.users.service.change_email(new_email, token)
+        service.change_email(new_email, token)
         return {"information": "Pomyślnie zmieniono email"}, 200
 
     except exceptions.ChangeEmailError:
@@ -98,5 +98,6 @@ def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
         )
 
 @router_user.patch("/me/password")
-def change_user_password():
-    pass
+def change_user_password(data: ChangePassword,user):
+    service.change_password(data, user)
+    return {"information": "Udało się zmienić hasło"}
