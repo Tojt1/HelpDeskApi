@@ -1,32 +1,31 @@
-# HelpDesk API
+# 🎫 HelpDesk API
 
-**Jest to projekt w którym użytkownik może utworzyć ticket z problemem,
-natomiast administrator może przypisać się do tego ticketu aż nie zostanie on zakońcxzony**
+#### REST API do obsługi zgłoszeń (ticketów) w systemie HelpDesk.
+**Użytkownik może stworzyć zgłoszenie, nadać mu tytuł oraz opisać na czym polega jego proble,
+natomiast administrator jest w stanie przypisać się do tego problemu,
+a następnie kontaktować się z uytkownikiem aby go rozwiązać.
+Na koniec administrator może zmienić ticket na zakończony po rozwiązaniu problemu.** 
 
-##  📝Funkcjonalność
+---
+##  ✨ Funkcjonalność
+ - 👤 Logowanie i rejestracja użytkowników
+ - 🔒Logowanie i autoryzacja za pomocą JWT
+ - ✉️Tworzenie ticketów
+ - 🛡️Role użytkwników
+ - 🧑‍💼Przypisywanie agenta do ticketu
+ - 💬Dodawanie komentarzy
+ - 🔁Zmiana statussu ticketów
+ - 🐳 Docker
+ - 🧪Testy
 
-- Rejestracja użytkownika
-- Twordzenie tokenów JWT
-- Role użytkownika
-- Tworzenie ticketów
-- Przypisywanie agenta
-- tworzenie komentarzy
-- zmiana statusu
-- usuwanie komentarzy
-- Filtrowanie
-- Docker
-- Test
+---
+## 🛠️ Technologie
 
-## 💡Technologie
-
- - Python
- - FastApi
- - Postgresql
- - psycopg2
- - JWT
- - bcrypt
- - Docker
- - Pytest
+| Technologia | Zastosowanie          |  
+| ----------- |-----------------------|
+|🐍 Python    | Główny język projektu |
+|⚡️Fastapi    | Framework do FAST API |
+| 🐘PostgreSQL| Baza danych           | 
 
 
 
