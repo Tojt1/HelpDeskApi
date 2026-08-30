@@ -125,7 +125,7 @@ def changePassword(new_password, user_id):
     with conn.cursor() as cur:
         try:
             cur.execute("UPDATE users SET password =%s WHERE id = %s", (new_password, user_id))
-            # conn.commit()
+            conn.commit()
 
         except Exception as e:
             print("Error: ", e)

@@ -110,7 +110,7 @@ def get_tickets_by_user(user_id):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("SELECT title, description, status, priority, category, created FROM tickets WHERE author_id = %s", (user_id, ))
+            cur.execute("SELECT id, title, description, status, priority, category, created FROM tickets WHERE author_id = %s", (user_id, ))
             return cur.fetchall()
 
         except Exception as e:

@@ -1,21 +1,23 @@
-import {useState, useEffect, use} from "react";
+import {useState, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
+import "./Tickets.css"
 
 
 function Tickets(){
+    const [tickets, setTickets] = useState([])
 
     useEffect(() => {
         const token = localStorage.getItem("token")
         const users = jwtDecode(token)
-        const [tickets, setTickets] = useState([])
-
+        console.log()
         const getData = async () => {
-            const response = await fetch(`http://localhost:8000/tickets/${users["id"]}}`, {
+            const response = await fetch(`http://localhost:8000/tickets/${users["id"]}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             })
-            const data = response.json()
+            const data = await response.json()
+            console.log(data)
             setTickets(data)
         }
         getData();
@@ -33,7 +35,7 @@ function Tickets(){
                             <h2>{ticket.title}</h2>
 
                             <p>{ticket.description}</p>
-                            <spn>Utworzono: {" "} {new Date(ticket.created).toLocaleDateString("pl-PL")}</spn>
+                            <span>Utworzono: {" "} {new Date(ticket.created).toLocaleDateString("pl-PL")}</span>
                         </div>
                     </div>
                 ))}
