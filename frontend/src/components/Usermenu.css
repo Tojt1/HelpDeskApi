@@ -3,9 +3,9 @@
 }
 
 .avatar{
-    position: absolute;
-    right: 0px;
-    top: 0;
+    position: fixed;
+    right: 40px;
+    top: 5px;
 
     width: 45px;
     height: 45px;
@@ -17,8 +17,8 @@
 }
 
 .dropdown {
-    position: absolute;
-    right: 0;
+    position: fixed;
+    right: 40px;
     top: 55px;
 
     width: 180px;

@@ -1,0 +1,12 @@
+.ticket-button{
+    position: fixed;
+    right: 115px;
+    top: 5px;
+
+    height: 45px;
+    width: 45px;
+
+    background-color: grey;
+    border-radius: 50px;
+    border: 1px black;
+}
