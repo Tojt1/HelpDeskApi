@@ -14,16 +14,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<RegisterUser />}/>
-          <Route path="/dashboard" element={
-              <CheckLogged>
-                  <Dashboard />
-              </ CheckLogged>
-              } />
-          <Route path="/me" element={
-              <CheckLogged>
-                  <Settings />
-              </CheckLogged>
-          }/>
+
+          <Route element={<CheckLogged />}>
+             <Route path="/dashboard" element={<Dashboard />} />
+             <Route path="/me" element={<Settings />}/>
+          </Route>
+
       </Routes>
   )
 }
