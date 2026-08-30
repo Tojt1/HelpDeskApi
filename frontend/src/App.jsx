@@ -7,6 +7,8 @@ import CheckLogged from "./components/CheckLogged.jsx";
 import Settings from "./pages/Settings.jsx";
 import { Routes, Route} from "react-router";
 import Usermenu from "./components/Usermenu.jsx";
+import CreateToken from "./pages/CreateToken.jsx";
+import CreateTokenButton from "./components/CreateTokenButton.jsx";
 
 function App() {
 
@@ -19,10 +21,12 @@ function App() {
           <Route element={<>
               <CheckLogged />
               <Usermenu />
+              <CreateTokenButton />
           </>}>
 
              <Route path="/dashboard" element={<Dashboard />} />
              <Route path="/me" element={<Settings />}/>
+              <Route path="createToken" element={<CreateToken />}/>
           </Route>
 
       </Routes>
