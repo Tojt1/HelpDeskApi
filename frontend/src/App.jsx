@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard.jsx";
 import CheckLogged from "./components/CheckLogged.jsx";
 import Settings from "./pages/Settings.jsx";
 import { Routes, Route} from "react-router";
+import usermenu from "./components/Usermenu.jsx";
+import Usermenu from "./components/Usermenu.jsx";
 
 function App() {
 
@@ -15,7 +17,11 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<RegisterUser />}/>
 
-          <Route element={<CheckLogged />}>
+          <Route element={<>
+              <CheckLogged />
+              <Usermenu />
+          </>}>
+
              <Route path="/dashboard" element={<Dashboard />} />
              <Route path="/me" element={<Settings />}/>
           </Route>
