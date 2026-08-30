@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard.jsx";
 import CheckLogged from "./components/CheckLogged.jsx";
 import Settings from "./pages/Settings.jsx";
 import { Routes, Route} from "react-router";
-import usermenu from "./components/Usermenu.jsx";
 import Usermenu from "./components/Usermenu.jsx";
 
 function App() {

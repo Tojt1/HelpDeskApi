@@ -78,9 +78,22 @@ def get_all_tickets(limit, page, sort):
         for row in rows
     ]
 
-def get_tickets_by_user(user_id):
+def get_tickets_by_user(token):
+    user_id = decode_token(token)["id"]
     try:
-        return repository.get_tickets_by_user(user_id)
+        tickets = repository.get_tickets_by_user(user_id)
+        return [
+            {
+            "id": ticket[0],
+            "title": ticket[1],
+            "descriiption": ticket[2],
+            "status": ticket[3],
+            "priority": ticket[4],
+            "category": ticket[5],
+            "created": ticket[6]
+            }
+            for ticket in tickets
+        ]
 
     except Exception as e:
         print("Error", e)

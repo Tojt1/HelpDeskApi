@@ -31,8 +31,8 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
             status_code=400,
             detail=str(e)
         )
-@router_ticket.get("/tickets/{user_id")
-def get_ticket_by_user(user_id:int):
+@router_ticket.get("/tickets/{user_id}")
+def get_ticket_by_user(user_id = Depends(oauth2)):
     return service.get_tickets_by_user(user_id)
 
 @router_ticket.get("/tickets/{ticket_id}")
