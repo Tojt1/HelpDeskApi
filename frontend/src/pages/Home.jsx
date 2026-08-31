@@ -15,14 +15,17 @@ function Home() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const items = localStorage.getItem("token")
+        const token = localStorage.getItem("token")
 
-        if(!items){
+        if(!token){
             alert("nie ma tokenu")
             navigate("/login");
             return;
         }
-        const token = localStorage.getItem("token")
+        if (!problemTitle.trim() || !problemDescription.trim() || !problemCategory.trim()){
+            alert("Wszystkie pole muszą być uzupełnion")
+            return;
+        }
 
         const response = await fetch("http://localhost:8000/tickets", {
             method: "POST",
