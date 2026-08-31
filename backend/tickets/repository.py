@@ -53,7 +53,7 @@ def add_ticket(ticket, user_id):
         try:
             cur.execute("INSERT INTO tickets(title, description, category, author_id) VALUES(%s, %s, %s, %s)",
                         (ticket.title, ticket.description, ticket.category, user_id))
-            conn.commit()
+            # conn.commit()
             return True
 
         except Exception:

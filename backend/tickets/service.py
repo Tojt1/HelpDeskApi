@@ -32,6 +32,13 @@ def assign_agent(ticket_id, jwt_token):
     return repository.assign_agent(ticket_id, user_id)
 
 def create_ticket(ticket, token):
+    print(ticket.title)
+    if len(ticket.title) < 2:
+        raise exceptions.EmptyFieldError("Wszystkie pole muszą być zapełnione")
+    if len(ticket.description) < 2:
+        raise exceptions.EmptyFieldError("Wszystkie pole muszą być zapełnione")
+    if len(ticket.category) < 2:
+        raise exceptions.EmptyFieldError("Wszystkie pole muszą być zapełnione")
     return repository.add_ticket(ticket, decode_token(token)["id"])
 
 def get_ticket_by_id(ticket_id):
