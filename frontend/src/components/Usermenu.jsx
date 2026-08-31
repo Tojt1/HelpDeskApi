@@ -17,7 +17,7 @@ function Usermenu(){
 
             {open && (
                 <div className="dropdown">
-                    <button onClick={() => navigate("/tickets")}>Tickets</button>
+                    <button onClick={() => navigate("/dashboard")}>Tickets</button>
                     <button onClick={() => navigate("/me")}>Settings</button>
                     <button onClick={handleLogout}>wyloguj</button>
                 </div>
