@@ -9,6 +9,8 @@ import { Routes, Route} from "react-router";
 import Usermenu from "./components/Usermenu.jsx";
 import CreateToken from "./pages/CreateToken.jsx";
 import CreateTokenButton from "./components/CreateTokenButton.jsx";
+import Ticket from "./pages/Ticket.jsx";
+import Tickets from "./components/Tickets.jsx";
 
 function App() {
 
@@ -22,11 +24,13 @@ function App() {
               <CheckLogged />
               <Usermenu />
               <CreateTokenButton />
-          </>}>
+          </>
+          }>
 
-             <Route path="/dashboard" element={<Dashboard />} />
-             <Route path="/me" element={<Settings />}/>
-              <Route path="createToken" element={<CreateToken />}/>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/me" element={<Settings />}/>
+              <Route path="/tickets" element={<CreateToken />}/>
+              <Route path="/tickets/:ticket_id" element={<Ticket />}/>
           </Route>
 
       </Routes>
