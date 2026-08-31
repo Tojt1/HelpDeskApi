@@ -8,11 +8,9 @@ import exceptions
 router_ticket = APIRouter()
 
 @router_ticket.post("/tickets")
-def create_ticket(ticket:CreateTicket, user_id = Depends(oauth2)):
+def create_ticket(ticket:CreateTicket, token = Depends(oauth2)):
     try:
-        print(ticket)
-        print(user_id)
-        return service.create_ticket(ticket, user_id)
+        return service.create_ticket(ticket, token)
     except exceptions.DbAddError as e:
         raise HTTPException(
             status_code=400,

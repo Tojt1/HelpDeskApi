@@ -18,7 +18,7 @@ function CreateToken() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorisation": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`
             },
             body:JSON.stringify({
                 title: problemTitle,
