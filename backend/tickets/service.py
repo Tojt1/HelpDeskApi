@@ -41,8 +41,9 @@ def create_ticket(ticket, token):
         raise exceptions.EmptyFieldError("Wszystkie pole muszą być zapełnione")
     return repository.add_ticket(ticket, decode_token(token)["id"])
 
-def get_ticket_by_id(ticket_id):
-    row = repository.get_ticket(ticket_id)
+def get_ticket_by_id(ticket_id, user):
+    user_id = decode_token(user)["id"]
+    row = repository.get_ticket(ticket_id, user_id)
 
     if row is None:
         return {"error": "Nie ma takiego ticketu"}

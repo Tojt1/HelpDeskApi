@@ -33,10 +33,10 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
 def get_ticket_by_user(user_id = Depends(oauth2)):
     return service.get_tickets_by_user(user_id)
 
-@router_ticket.get("/tickets/{ticket_id}")
-def get_ticket_by_id(ticket_id:int):
+@router_ticket.get("/tickets/{user_id}/{ticket_id}")
+def get_ticket_by_id(ticket_id:int , user = Depends(oauth2)):
     try:
-        return service.get_ticket_by_id(ticket_id)
+        return service.get_ticket_by_id(ticket_id, user)
     except exceptions.DbDownloadError as e:
         raise HTTPException(
             status_code=400,
