@@ -63,12 +63,12 @@ def add_ticket(ticket, user_id):
         finally:
             pool.putconn(conn)
 
-def get_ticket(ticket_id):
+def get_ticket(ticket_id, user_id):
     conn = pool.getconn()
 
     with conn.cursor() as cur:
         try:
-            cur.execute("SELECT * FROM tickets WHERE id =%s", (ticket_id, ))
+            cur.execute("SELECT * FROM tickets WHERE id =%s and author_id =%s", (ticket_id, user_id))
             return cur.fetchone()
 
         except Exception:

@@ -17,7 +17,6 @@ function Tickets(){
                 }
             })
             const data = await response.json()
-            console.log(data)
             setTickets(data)
         }
         getData();
