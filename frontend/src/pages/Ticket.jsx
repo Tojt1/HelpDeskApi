@@ -23,9 +23,26 @@ function Ticket (){
     }, []);
 
     return (
-        <>
-            <h1>{ticket.id}</h1>
-        </>
+
+        <div className="ticket-container">
+            <div className="ticket-header">
+                <span className="ticket-label">Ticket #{ticket.id}</span>
+                <h1>{ticket.title}</h1>
+            </div>
+            <div className="ticket-description">
+                <h3>Opis zgłoszenia</h3>
+                <p>{ticket.description}</p>
+            </div>
+            <div className="ticket-info">
+                <span>Ostatnia aktualizacja
+                    <strong>{new Date(ticket.updated). toLocaleDateString("pl-PL")}</strong>
+                </span>
+            </div>
+            <div className="info-item">
+                <span>Status
+                <strong>{ticket.status}</strong> </span>
+            </div>
+        </div>
     )
 }
 
