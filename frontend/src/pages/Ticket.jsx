@@ -1,6 +1,7 @@
 import {useParams} from "react-router";
-import {useState, useEffect, use} from "react";
+import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
+import "./Ticket.css"
 
 function Ticket (){
     const { ticket_id } = useParams()
