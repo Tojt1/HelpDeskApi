@@ -27,8 +27,10 @@ function Ticket (){
 
         <div className="ticket-container">
             <div className="ticket-header">
-                <span className="ticket-label">Ticket #{ticket.id}</span>
-                <h1>{ticket.title}</h1>
+                <div>
+                    <span className="ticket-label">Ticket #{ticket.id}</span>
+                    <h1>{ticket.title}</h1>
+                </div>
             </div>
             <div className="ticket-description">
                 <h3>Opis zgłoszenia</h3>

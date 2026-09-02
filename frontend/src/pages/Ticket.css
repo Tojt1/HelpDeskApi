@@ -2,42 +2,59 @@
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
-    margin: 50px auto;
-    padding: 30px;
+
+    padding: 60px 10%;
 
     background: white;
     border: 1px solid #e5e5e5;
     border-radius: 16px;
 
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+/* Nagłówek */
 .ticket-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    position: relative;
 
-    gap: 20px;
-    padding-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 40px;
     border-bottom: 1px solid #eee;
 }
 
+/* ID ticketu */
 .ticket-label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 
-    font-size: 13px;
+    font-size: 14px;
+    text-align: center;
     color: #999;
 }
 
+/* Tytuł */
 .ticket-header h1 {
     margin: 0;
-    font-size: 32px;
+
+    font-size: 36px;
+    text-align: center;
     color: #222;
 }
 
+/* Status */
 .ticket-status {
-    padding: 7px 14px;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    padding: 8px 16px;
+
     border-radius: 20px;
 
     font-size: 14px;
@@ -46,38 +63,51 @@
     background: #eee;
 }
 
+/* Opis */
 .ticket-description {
-    padding: 30px 0;
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+    padding: 50px 0;
 }
 
 .ticket-description h3 {
-    margin: 0 0 12px;
-    font-size: 16px;
+    margin: 0 0 15px;
+
+    font-size: 18px;
     color: #555;
 }
 
 .ticket-description p {
     margin: 0;
 
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.8;
+
     color: #333;
 
     white-space: pre-wrap;
 }
 
+/* Informacje na dole */
 .ticket-info {
     display: flex;
-    gap: 50px;
+    justify-content: center;
 
-    padding-top: 20px;
+    gap: 100px;
+
+    padding-top: 35px;
     border-top: 1px solid #eee;
 }
 
 .info-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+
+    gap: 8px;
+
+    min-width: 180px;
 }
 
 .info-item span {
@@ -86,6 +116,6 @@
 }
 
 .info-item strong {
-    font-size: 15px;
+    font-size: 16px;
     color: #333;
 }

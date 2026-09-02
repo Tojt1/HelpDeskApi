@@ -7,8 +7,8 @@ import CheckLogged from "./components/CheckLogged.jsx";
 import Settings from "./pages/Settings.jsx";
 import { Routes, Route} from "react-router";
 import Usermenu from "./components/Usermenu.jsx";
-import CreateToken from "./pages/CreateToken.jsx";
-import CreateTokenButton from "./components/CreateTokenButton.jsx";
+import CreateTicket from "./pages/CreateTicket.jsx";
+import CreateTicketButton from "./components/CreateTicketButton.jsx";
 import Ticket from "./pages/Ticket.jsx";
 import Tickets from "./components/Tickets.jsx";
 
@@ -23,13 +23,13 @@ function App() {
           <Route element={<>
               <CheckLogged />
               <Usermenu />
-              <CreateTokenButton />
+              <CreateTicketButton />
           </>
           }>
 
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/me" element={<Settings />}/>
-              <Route path="/tickets" element={<CreateToken />}/>
+              <Route path="/createTicket" element={<CreateTicket />}/>
               <Route path="/tickets/:ticket_id" element={<Ticket />}/>
           </Route>
 

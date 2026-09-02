@@ -25,14 +25,14 @@ function Tickets(){
     }, []);
 
     return (
-        <div className="ticket-container">
+        <div className="tickets-container">
             <h1>Moje tickety</h1>
             <div className="tickets-list">
                 {tickets.map((ticket) => (
-                    <div className="ticket-card"
+                    <div className="tickets-card"
                     key={ticket.id}
                     onClick={() => navigate(`/tickets/${ticket.id}`)}>
-                        <div className="ticket-items">
+                        <div className="tickets-items">
                             <h2>{ticket.title}</h2>
 
                             <p>{ticket.description}</p>
