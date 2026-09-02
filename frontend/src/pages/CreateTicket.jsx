@@ -1,7 +1,7 @@
 import {jwtDecode} from "jwt-decode";
 import {useState} from "react";
 
-function CreateToken() {
+function CreateTicket() {
     const token = localStorage.getItem("token");
     const users = jwtDecode(token);
     const [problemTitle, setProblemTitle] = useState("")
@@ -66,4 +66,4 @@ function CreateToken() {
     )
 }
 
-export default CreateToken
+export default CreateTicket
