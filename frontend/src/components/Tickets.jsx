@@ -1,10 +1,12 @@
 import {useState, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
+import {useNavigate} from "react-router";
 import "./Tickets.css"
 
 
 function Tickets(){
     const [tickets, setTickets] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -29,7 +31,7 @@ function Tickets(){
                 {tickets.map((ticket) => (
                     <div className="ticket-card"
                     key={ticket.id}
-                    onClick={() => console.log("Kliknięto", ticket.id)}>
+                    onClick={() => navigate(`/tickets/${ticket.id}`)}>
                         <div className="ticket-items">
                             <h2>{ticket.title}</h2>
 
