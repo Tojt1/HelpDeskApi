@@ -16,7 +16,7 @@
     justify-content: center;
 }
 
-/* Nagłówek */
+
 .ticket-header {
     position: relative;
 
@@ -28,7 +28,7 @@
     border-bottom: 1px solid #eee;
 }
 
-/* ID ticketu */
+
 .ticket-label {
     display: block;
     margin-bottom: 12px;
@@ -38,7 +38,7 @@
     color: #999;
 }
 
-/* Tytuł */
+
 .ticket-header h1 {
     margin: 0;
 
@@ -47,7 +47,7 @@
     color: #222;
 }
 
-/* Status */
+
 .ticket-status {
     position: absolute;
     right: 0;
@@ -63,7 +63,7 @@
     background: #eee;
 }
 
-/* Opis */
+
 .ticket-description {
     width: 100%;
     max-width: 900px;
@@ -90,7 +90,7 @@
     white-space: pre-wrap;
 }
 
-/* Informacje na dole */
+
 .ticket-info {
     display: flex;
     justify-content: center;
