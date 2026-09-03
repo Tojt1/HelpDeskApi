@@ -15,6 +15,11 @@ function CreateTicket() {
     const SubmitDash = async (e) => {
         e.preventDefault()
 
+        if (!problemTitle.trim() || !problemDescription.trim() || !problemCategory.trim()){
+            alert("Wszystkie pola muszą być wypełnione")
+            return ;
+        }
+
         const token = localStorage.getItem("token")
 
         const response = await fetch("http://localhost:8000/tickets", {
