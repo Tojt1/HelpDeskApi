@@ -9,6 +9,11 @@ function ChangePassword() {
     const handleChangePassword = async (e) => {
         e.preventDefault()
 
+        if (!currentPassword.trim() || !newPassword.trim()){
+            alert("Oba pola muszą być wypełnione")
+            return;
+        }
+
         const token = localStorage.getItem("token")
 
         const response = await fetch("http://localhost:8000/me/password", {
@@ -23,7 +28,6 @@ function ChangePassword() {
             })
         })
         const data = response.json()
-        console.log("t")
     }
 
     return (

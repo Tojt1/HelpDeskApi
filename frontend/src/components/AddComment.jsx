@@ -5,10 +5,15 @@ import "./AddComment.css"
 
 function AddComment (){
     const [open, setOpen] = useState(false)
-    const [content, setContent] = useState(false)
+    const [content, setContent] = useState("")
 
     const handleComment = async (e) => {
         e.preventDefault()
+
+        if (!content.trim()){
+            alert("Komentarz nie może być pusty")
+            return;
+        }
 
         const token = localStorage.getItem("token")
         const user = jwtDecode(token)

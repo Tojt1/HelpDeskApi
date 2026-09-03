@@ -10,6 +10,11 @@ function ChangeEmail(){
     const handdleChangeEmail = async (e) => {
         e.preventDefault()
 
+        if (!currentEmail.trim() || !newEmail.trim()){
+            alert("Wszystkie pola muszą być wypełnione")
+            return;
+        }
+
         setError(null)
 
         const token = localStorage.getItem("token")
