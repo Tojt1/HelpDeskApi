@@ -5,7 +5,7 @@ import backend.comments.service as service
 import exceptions
 comments_router = APIRouter()
 
-@comments_router.post("/tickets/{ticket_id}/comments")
+@comments_router.post("/tickets/{user_id}/{ticket_id}/comments")
 def create_comment(ticket_id:int, comment:Comment, user_id = Depends(decode_token)):
     try:
         return service.add_comment(ticket_id, comment, user_id["id"])
