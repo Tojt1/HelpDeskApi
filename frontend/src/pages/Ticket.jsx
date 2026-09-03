@@ -2,6 +2,7 @@ import {useParams} from "react-router";
 import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import "./Ticket.css"
+import AddComment from "../components/AddComment.jsx";
 
 function Ticket (){
     const { ticket_id } = useParams()
@@ -17,7 +18,6 @@ function Ticket (){
                 }
             })
             const data = await respone.json()
-            console.log(data)
             setTicket(data)
         }
         getTicket();
@@ -45,6 +45,7 @@ function Ticket (){
                 <span>Status
                 <strong>{ticket.status}</strong> </span>
             </div>
+            < AddComment />
         </div>
     )
 }

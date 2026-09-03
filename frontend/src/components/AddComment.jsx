@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
+import "./AddComment.css"
 
 function AddComment (){
     const [open, setOpen] = useState(false)
@@ -35,7 +36,7 @@ function AddComment (){
 
     return (
         <>
-            <button onClick={() => setOpen(true)}>Dodaj komentarz</button>
+            <button className="comment-open" onClick={() => setOpen(true)}>Dodaj komentarz</button>
 
             {open &&
             <div className="comment-background" onClick={() => setOpen(false)}>
@@ -47,7 +48,7 @@ function AddComment (){
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                         />
-                        <button onClick={handleComment}></button>
+                        <button className="comment-btn" onClick={handleComment}>Dodaj</button>
                     </form>
                 </div>
             </div>
@@ -55,3 +56,5 @@ function AddComment (){
         </>
     )
 }
+
+export default AddComment
