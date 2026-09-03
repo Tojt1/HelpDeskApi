@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./login.css"
 import {useNavigate} from "react-router";
 import {Link} from "react-router";
@@ -8,8 +8,13 @@ function Login(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loginInfo, setLoginInfo] = useState(null);
     const [loginError, setLoginError] = useState("")
+
+    useEffect(() => {
+        if (localStorage.getItem("token")){
+            navigate("/dashboard")
+        }
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -26,11 +31,13 @@ function Login(){
                     email, password
                 })
             });
+
             const data = await response.json();
-            console.log(data.detail)
+
             if (!response.ok){
                 setLoginError(data.detail || "Niepoprawny email lub hasło")
             } else {
+
             localStorage.setItem("token", data.token)
 
             alert("Pomyślnie zalogowano")
