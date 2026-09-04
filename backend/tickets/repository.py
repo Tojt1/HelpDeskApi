@@ -15,7 +15,7 @@ def db_exists_ticket(ticket_id):
             raise exceptions.DBCehckExistsError("Wystąpił błąd podczas sprawdzania ticketu")
 
         finally:
-            pool.putconn()
+            pool.putconn(conn)
 
 def check_if_ticket_close(ticket_id):
     conn = pool.getconn()
@@ -29,7 +29,7 @@ def check_if_ticket_close(ticket_id):
             raise exceptions.DBCehckExistsError("wystąpił błąd podczas sprawdzania, czy ticket jest zamknięty")
 
         finally:
-            pool.putconn()
+            pool.putconn(conn)
 
 def assign_agent(ticket_id, user_id):
     conn = pool.getconn()
