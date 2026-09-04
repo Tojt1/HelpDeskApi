@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
 from backend.comments.schemas import Comment
-from backend.users.service import decode_token
+from authorisation import  oauth2
 import backend.comments.service as service
 import exceptions
 comments_router = APIRouter()
 
 @comments_router.post("/tickets/{user_id}/{ticket_id}/comments")
-def create_comment(ticket_id:int, comment:Comment, user_id = Depends(decode_token)):
+def create_comment(user_id:int ,ticket_id:int, comment:Comment, token = Depends(oauth2)):
     try:
-        return service.add_comment(ticket_id, comment, user_id["id"])
+        return service.add_comment(user_id, ticket_id, comment, token)
     except exceptions.DbAddError as e:
         return HTTPException(
             status_code=400,

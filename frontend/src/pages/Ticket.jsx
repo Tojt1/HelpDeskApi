@@ -45,7 +45,7 @@ function Ticket (){
                 <span>Status
                 <strong>{ticket.status}</strong> </span>
             </div>
-            < AddComment />
+            <AddComment />
         </div>
     )
 }

@@ -6,6 +6,7 @@ import "./AddComment.css"
 function AddComment (){
     const [open, setOpen] = useState(false)
     const [content, setContent] = useState("")
+    const {ticket_id} = useParams()
 
     const handleComment = async (e) => {
         e.preventDefault()
@@ -17,17 +18,16 @@ function AddComment (){
 
         const token = localStorage.getItem("token")
         const user = jwtDecode(token)
-        const {ticket_id} = useParams()
 
-        const response = await fetch(`http://localhost8000/tickets/${user["id"]}/${ticket_id}/comments`, {
+        const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments`, {
             method: "POST",
             headers:{
                 "Content-type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(
-                content
-            )
+            body: JSON.stringify({
+                content: content
+            })
         })
         if (response.ok){
             alert("Pomyślnie dodano komentarz")
