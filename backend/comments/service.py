@@ -1,13 +1,16 @@
 from backend.tickets.service import check_ticket_is_close, check_ticket_exist
 import backend.comments.repository as repository
+from backend.users.service import decode_token
 
 
-
-def add_comment(ticket_id, comment, user_id):
+def add_comment(user_id ,ticket_id, comment, token):
+    if decode_token(token)["id"] != user_id:
+        return {"error": "Nie ma takiego ticketu"}
     if not check_ticket_exist(ticket_id):
         return {"error": "Nie ma takiego ticketu"}
     if not check_ticket_is_close(ticket_id):
         return {"error": "Ten ticket jst zamkniety"}
+
 
     return repository.create_comment(ticket_id, comment, user_id)
 
