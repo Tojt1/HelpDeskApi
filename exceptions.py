@@ -57,3 +57,18 @@ class ChangePasswordError(Exception):
 
 class EmptyFieldError(Exception):
     pass
+
+class UserError(Exception):
+    pass
+
+class TicketDontExistsError(Exception):
+    pass
+
+class TicketClosedError(Exception):
+    pass
+
+class CommentDontExistaError(Exception):
+    pass
+
+class CommentError(Exception):
+    pass
