@@ -10,9 +10,29 @@ def create_comment(user_id:int ,ticket_id:int, comment:Comment, token = Depends(
     try:
         return service.add_comment(user_id, ticket_id, comment, token)
     except exceptions.DbAddError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail= str(e)
+        )
+    except exceptions.TicketDontExistsError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+    except exceptions.TicketClosedError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+    except exceptions.CommentError as e:
+        raise HTTPException(
+            status_code=400,
+            detail= str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
         )
 
 
