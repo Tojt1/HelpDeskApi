@@ -7,6 +7,7 @@ import AddComment from "../components/AddComment.jsx";
 function Ticket (){
     const { ticket_id } = useParams()
     const [ticket, setTicket] = useState([])
+    const [comments, setComments] = useState([])
 
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -21,6 +22,18 @@ function Ticket (){
             setTicket(data)
         }
         getTicket();
+
+        const getComments = async() => {
+            const response = await fetch(`http://localhost:8000/tickets/${users["id"]}/${ticket_id}/comments`, {
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            setComments(data)
+        }
+        getComments();
+
     }, []);
 
     return (
@@ -46,6 +59,17 @@ function Ticket (){
                 <strong>{ticket.status}</strong> </span>
             </div>
             <AddComment />
+            <div className="comments">
+                {comments.map((comment) =>(
+                    <div className="comment-card" key={comment.id}>
+                        <strong>{comment.author_id}</strong>
+
+                        <span>{new Date(comment.created).toLocaleDateString("pl-PL")}</span>
+
+                        <p>{comment.content}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
