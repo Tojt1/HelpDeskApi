@@ -16,3 +16,7 @@ class ChangeEmail(BaseModel):
 class ChangePassword(BaseModel):
     new_password: str
     old_password: str
+
+class ChangeName(BaseModel):
+    new_name: str
+    old_name: str

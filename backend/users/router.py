@@ -1,5 +1,5 @@
 from fastapi import APIRouter,HTTPException, Depends
-from backend.users.schemas import RegisterUser, LoginUser, ChangeEmail, ChangePassword
+from backend.users.schemas import RegisterUser, LoginUser, ChangeEmail, ChangePassword, ChangeName
 import backend.users.service as service
 import exceptions
 from authorisation import oauth2
@@ -126,3 +126,11 @@ def change_user_password(data: ChangePassword, user = Depends(oauth2)):
             status_code=400,
             detail= str(e)
         )
+
+@router_user("/me/name")
+def change_user_name(data: ChangeName, token = Depends(oauth2)):
+    try:
+        service.change_name(data, token)
+    except Exception as e:
+        print("Błąd", e)
+        #HTTPRESPONSE z odpowiednim bledem

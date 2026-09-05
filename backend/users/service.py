@@ -164,3 +164,15 @@ def change_password(data, token):
         print("Error: ", e)
         raise exceptions.ChangePasswordError("Wystąpił błąd podczas zmiany hasła")
 
+
+def change_name(data,token):
+    try:
+        user = decode_token(token)
+        if data.new_name == data.old_name:
+            #raise odpowiedni błąd
+            pass
+        return repository.changeName(data.new_name, user["id"])
+    except Exception as e:
+        print("Błąd", e)
+        # Dodać raise eeror
+

@@ -150,3 +150,14 @@ def getname(user_id):
             pool.putconn(conn)
 
 
+def changeName(newName, user_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("UPDATE userse SET name =%s WHERE id =%s", (newName, user_id))
+            conn.commit()
+
+        except Exception as e:
+            print("Błąd", e)
+            # raise odpowiedni error
