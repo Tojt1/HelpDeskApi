@@ -135,5 +135,18 @@ def changePassword(new_password, user_id):
             pool.putconn(conn)
 
 
+def getname(user_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("SELECT name FROM users WHERE id =%s ", (user_id, ))
+            return cur.fetchone()
+
+        except Exception as e:
+            print("Błąd", e)
+
+        finally:
+            pool.putconn(conn)
 
 

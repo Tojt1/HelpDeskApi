@@ -36,10 +36,10 @@ def create_comment(user_id:int ,ticket_id:int, comment:Comment, token = Depends(
         )
 
 
-@comments_router.get("/tickets/{ticket_id}/comments")
-def get_comments_to_ticket(ticket_id):
+@comments_router.get("/tickets/{user_id}/{ticket_id}/comments")
+def get_comments_to_ticket(user_id:int, ticket_id:int, token = Depends(oauth2)):
     try:
-        return service.get_all_comments(ticket_id)
+        return service.get_all_comments(ticket_id, user_id, token)
     except exceptions.DbDownloadError as e:
         return HTTPException(
             status_code=400,
