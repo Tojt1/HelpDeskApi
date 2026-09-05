@@ -119,3 +119,81 @@
     font-size: 16px;
     color: #333;
 }
+
+
+.comments {
+    width: 100%;
+    max-width: 800px;
+
+    margin: 40px auto 0;
+    padding-top: 25px;
+
+    border-top: 1px solid #ddd;
+}
+
+
+.comments h2 {
+    margin: 0 0 20px;
+
+    color: #222;
+    font-size: 24px;
+}
+
+
+.comment-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-bottom: 16px;
+    padding: 18px 20px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    transition: 0.2s ease;
+}
+
+
+.comment-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+.comment-card strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #222;
+    font-size: 16px;
+}
+
+
+.comment-card span {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #888;
+    font-size: 13px;
+}
+
+
+.comment-card p {
+    margin: 0;
+
+    color: #333;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+

@@ -40,7 +40,7 @@ def get_all_comments(ticket_id, user_id, token):
             "content":row[1],
             "ticket_id":ticket_id,
             "author_id":row[2],
-            "user_name":user_name[0],
+            "author_name":user_name[0],
             "created":row[3]
         }
             for row in rows

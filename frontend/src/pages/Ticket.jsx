@@ -59,10 +59,11 @@ function Ticket (){
                 <strong>{ticket.status}</strong> </span>
             </div>
             <AddComment />
+
             <div className="comments">
                 {comments.map((comment) =>(
                     <div className="comment-card" key={comment.id}>
-                        <strong>{comment.author_id}</strong>
+                        <strong>{comment.author_name}</strong>
 
                         <span>{new Date(comment.created).toLocaleDateString("pl-PL")}</span>
 
