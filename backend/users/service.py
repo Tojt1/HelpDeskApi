@@ -1,8 +1,11 @@
+
+
 import bcrypt
 from backend.users import repository
 import jwt
 import config
 import exceptions
+import datetime
 
 def register_user(user):
     try:
@@ -75,11 +78,13 @@ def load_all_users():
 
 
 
+
 def create_jwt_toc(user, email):
     token = jwt.encode(
         {"id": user[1],
          "name": user[2],
-         "email": email},
+         "email": email,
+         "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=300)},
         config.SECRET_KEY,
         algorithm="HS256"
     )
