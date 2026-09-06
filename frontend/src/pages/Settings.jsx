@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {useState} from "react";
 import ChangeEmail from "../components/ChangeEmail.jsx";
 import ChangePassword from "../components/ChangePassword.jsx";
+import ChangeName from "../components/ChangeName.jsx";
 import "./Settings.css"
 
 function Settings (){
@@ -35,6 +36,11 @@ function Settings (){
             <div className="setting-row">
             <p>{informations.email}</p>
             <ChangePassword />
+            </div>
+
+            <div className="setting-row">
+                <p>{informations.name}</p>
+                <ChangeName />
             </div>
 
             <div className="setting-row">

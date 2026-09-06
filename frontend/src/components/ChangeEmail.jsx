@@ -30,12 +30,12 @@ function ChangeEmail(){
                 new_email: newEmail
             })
         })
-        const data = response.json()
-        console.log(data)
+
         if (response.ok){
             alert("Pomyślnie zmieniono email")
         }
         else{
+            const data = response.json()
             setError(data.detail)
         }
     }

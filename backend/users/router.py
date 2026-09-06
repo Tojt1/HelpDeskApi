@@ -127,7 +127,7 @@ def change_user_password(data: ChangePassword, user = Depends(oauth2)):
             detail= str(e)
         )
 
-@router_user("/me/name")
+@router_user.patch("/me/name")
 def change_user_name(data: ChangeName, token = Depends(oauth2)):
     try:
         service.change_name(data, token)
