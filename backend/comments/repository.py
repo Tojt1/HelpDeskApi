@@ -35,18 +35,6 @@ def get_all_comments(ticket_id):
         finally:
             pool.putconn(conn)
 
-def get_comm(comm_id):
-    conn = pool.getconn()
-    with conn.cursor() as cur:
-        try:
-            cur.execute("SELECT content, ticket_id, author_id, created FROM comment WHERE id = %s", (comm_id, ))
-            return cur.fetchone()
-
-        except Exception:
-            raise exceptions.DbDownloadError("Błąd podczas pobierania komentarza")
-
-        finally:
-            pool.putconn(conn)
 
 def delete_comm(comm_id):
     conn = pool.getconn()

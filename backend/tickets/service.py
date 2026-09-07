@@ -10,16 +10,19 @@ allowed_sort = {
     "created":"created"
 }
 
+# Checking if ticket is closed
 def check_ticket_is_close(ticket_id):
     if repository.check_if_ticket_close(ticket_id) == "CLOSED":
         return False
     return True
 
+#Checking if ticket exists
 def check_ticket_exist(ticket_id):
     if repository.db_exists_ticket(ticket_id) is None:
         return False
     return True
 
+#Assign an agent to the ticket
 def assign_agent(ticket_id, jwt_token):
     user_id = decode_token(jwt_token)["id"]
     if not check_ticket_exist(ticket_id):
@@ -31,6 +34,7 @@ def assign_agent(ticket_id, jwt_token):
 
     return repository.assign_agent(ticket_id, user_id)
 
+#Logistic for creating the ticket
 def create_ticket(ticket, token):
     print(ticket.title)
     if len(ticket.title) < 2:
@@ -41,6 +45,7 @@ def create_ticket(ticket, token):
         raise exceptions.EmptyFieldError("Wszystkie pole muszą być zapełnione")
     return repository.add_ticket(ticket, decode_token(token)["id"])
 
+#Get specific ticket
 def get_ticket_by_id(ticket_id, user):
     user_id = decode_token(user)["id"]
     row = repository.get_ticket(ticket_id, user_id)
@@ -60,11 +65,13 @@ def get_ticket_by_id(ticket_id, user):
         "closed": row[9]
     }
 
+# Get ticket sorted by status
 def get_all_tickets_by_status(status, sort,  limit, page):
     offset = (page-1) * limit
     sort = allowed_sort.get(sort, "id")
     return repository.get_tickets_by_status(status, sort, limit, offset)
 
+# Get all tckets
 def get_all_tickets(limit, page, sort):
     offset = (page-1) * limit
     sort = allowed_sort.get(sort, "id")
@@ -86,6 +93,7 @@ def get_all_tickets(limit, page, sort):
         for row in rows
     ]
 
+# Get tickets created by user
 def get_tickets_by_user(token):
     user_id = decode_token(token)["id"]
     try:

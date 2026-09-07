@@ -2,7 +2,7 @@ from database import pool
 import datetime
 import exceptions
 
-
+# Check if ticket exists
 def db_exists_ticket(ticket_id):
     conn = pool.getconn()
 
@@ -17,6 +17,7 @@ def db_exists_ticket(ticket_id):
         finally:
             pool.putconn(conn)
 
+#Check if ticket status is close
 def check_if_ticket_close(ticket_id):
     conn = pool.getconn()
 
@@ -31,6 +32,7 @@ def check_if_ticket_close(ticket_id):
         finally:
             pool.putconn(conn)
 
+#Assign agent to the ticket
 def assign_agent(ticket_id, user_id):
     conn = pool.getconn()
 
@@ -46,6 +48,7 @@ def assign_agent(ticket_id, user_id):
         finally:
             pool.putconn(conn)
 
+# Create ticket in db
 def add_ticket(ticket, user_id):
     conn = pool.getconn()
 
@@ -63,6 +66,7 @@ def add_ticket(ticket, user_id):
         finally:
             pool.putconn(conn)
 
+# get a specific ticket from db
 def get_ticket(ticket_id, user_id):
     conn = pool.getconn()
 
@@ -77,6 +81,7 @@ def get_ticket(ticket_id, user_id):
         finally:
             pool.putconn(conn)
 
+# Get tickets sorted by status
 def get_tickets_by_status(status, sort,  limit, offset):
     conn = pool.getconn()
 
@@ -91,6 +96,7 @@ def get_tickets_by_status(status, sort,  limit, offset):
         finally:
             pool.putconn(conn)
 
+# Get all tickets
 def get_all_tickets(limit, offset, sort):
     conn = pool.getconn()
 
@@ -105,6 +111,7 @@ def get_all_tickets(limit, offset, sort):
         finally:
             pool.putconn(conn)
 
+# Get tickets created by specific user
 def get_tickets_by_user(user_id):
     conn = pool.getconn()
 

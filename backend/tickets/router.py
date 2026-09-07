@@ -7,6 +7,8 @@ import exceptions
 
 router_ticket = APIRouter()
 
+
+# Create new ticket
 @router_ticket.post("/tickets")
 def create_ticket(ticket:CreateTicket, token = Depends(oauth2)):
     try:
@@ -17,6 +19,7 @@ def create_ticket(ticket:CreateTicket, token = Depends(oauth2)):
             detail= str(e)
         )
 
+# Get all tickets for admins
 @router_ticket.get("/tickets")
 def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
     try:
@@ -29,10 +32,13 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
             status_code=400,
             detail=str(e)
         )
+
+# Get all tickets from specific user
 @router_ticket.get("/tickets/{user_id}")
 def get_ticket_by_user(user_id = Depends(oauth2)):
     return service.get_tickets_by_user(user_id)
 
+#Get specific tikcet
 @router_ticket.get("/tickets/{user_id}/{ticket_id}")
 def get_ticket_by_id(ticket_id:int , user = Depends(oauth2)):
     try:
@@ -43,6 +49,7 @@ def get_ticket_by_id(ticket_id:int , user = Depends(oauth2)):
             detail= str(e)
         )
 
+#Assign agnet to the ticket
 @router_ticket.patch("/tickets/{ticket_id}/assign")
 def assign_agent(ticket_id:int, jwt_code):
     try:
