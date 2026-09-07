@@ -1,0 +1,90 @@
+.deletea-open{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    border: 1px solid black;
+    border-radius: 20px;
+
+    background-color: red;
+    color: white;
+    font-size: 16px;
+
+    padding: 3px;
+    margin-top: 10px;
+
+    cursor: pointer;
+}
+
+.deletea-open:hover{
+    background-color: #BA0606FF;
+    transform: translateY(-2px);
+}
+
+.deletea-bacground{
+    position:fixed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.deletea-container{
+    display: block;
+    position:fixed;
+    align-items: center;
+    justify-content: center;
+
+    width: 500px;
+    min-height: 200px;
+    padding:30px;
+
+    background-color: white;
+    color: black;
+    top: 20%;
+    right: 30%;
+}
+
+.deletea-container span{
+    display: block;
+    margin-left: 15px;
+    line-height:  1.6;
+    font-size: 19px;
+}
+.deletea-buttons{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 45px;
+}
+.deletea-btn{
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    width: 80px;
+    font-size: 15px;
+}
+.deletea-btn:hover{
+    background-color: #BA0606FF;
+    transform: translateY(-0.5px);
+}
+
+.cancel-btn{
+    color:white;
+    background-color: green;
+    border:none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    width: 80px;
+    font-size: 15px;
+}
+.cancel-btn:hover{
+    background-color: #025502FF;
+    transform: translateY(-0.5px);
+}

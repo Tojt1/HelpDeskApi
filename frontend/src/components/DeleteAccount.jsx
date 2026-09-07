@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import "./DeleteAccount.css"
 
 function DeleteAccount (){
     const [open, setOpen] = useState(false)
@@ -31,8 +32,10 @@ function DeleteAccount (){
                     <div className="deletea-container" onClick={(e) => e.stopPropagation()}>
                         <span>Czy na pewno chcesz usunąć swoje konto?Tej operacji nie można cofnąć.
                             Po usunięciu konta utracisz dostęp do swoich danych i zapisanych informacji.</span>
-                        <button className="deletea-btn" onClick={handleDelete}>Tak</button>
-                        <button className="cancel-btn" onClick={() => setOpen(false)}>Nie</button>
+                        <div className="deletea-buttons">
+                            <button className="deletea-btn" onClick={handleDelete}>Tak</button>
+                            <button className="cancel-btn" onClick={() => setOpen(false)}>Nie</button>
+                        </div>
                     </div>
                 </>
             )}

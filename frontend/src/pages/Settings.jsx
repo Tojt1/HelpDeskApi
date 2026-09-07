@@ -3,6 +3,7 @@ import {useState} from "react";
 import ChangeEmail from "../components/ChangeEmail.jsx";
 import ChangePassword from "../components/ChangePassword.jsx";
 import ChangeName from "../components/ChangeName.jsx";
+import DeleteAccount from "../components/DeleteAccount.jsx";
 import "./Settings.css"
 
 function Settings (){
@@ -46,6 +47,8 @@ function Settings (){
             <div className="setting-row">
             <p>{informations.created}</p>
             </div>
+
+            <DeleteAccount />
 
         </div>
     )
