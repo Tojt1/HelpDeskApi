@@ -1,4 +1,5 @@
 import {useState} from "react";
+import "./ChangeName.css"
 
 function ChangeName() {
     const [open, setOpen] = useState(false)
@@ -29,34 +30,35 @@ function ChangeName() {
     }
 
     return(
-        <civ>
+        <>
             <button className="name-open" onClick={() => setOpen(true)}>Zmień</button>
             {open &&(
-                <div className="name-background" onClick={() => setOpen(false)}>
-                    <div className="name-container" onClick={(e) => e.preventDefault()}>
-                        <form className="name-form">
-                            <h2>ZMiana imienia</h2>
-                            <p>Obecny nick:</p>
-                            <input
+                <>
+                    <div className="name-background" onClick={() => setOpen(false)}> </div>
+                        <div className="name-container" onClick={(e) => e.stopPropagation()}>
+                            <form className="name-form" onSubmit={handleChange}>
+                                <h2>Zmiana imienia</h2>
+                                <p>Obecny nick:</p>
+                                <input
+                                    type="text"
+                                    placeholder="Twoje obecny nick ..."
+                                    value={currentName}
+                                    onChange={(e)=> setCurrentName(e.target.value)}
+                                />
+                                <p>nowy nick:</p>
+                                <input
                                 type="text"
-                                placeholder="Twoje obecny nick ..."
-                                value={currentName}
-                                onChange={(e)=> setCurrentName(e.target.value)}
-                            />
-                            <p>nowy nick:</p>
-                            <input
-                            type="text"
-                            placeholder="Nowey nick ...."
-                            value={newName}
-                            onChange={(e) => setNewName(e.target.value)}/>
+                                placeholder="Nowey nick ...."
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}/>
 
-                            <button type="submit">Zmień</button>
-                        </form>
-                    </div>
-                </div>
+                                <button type="submit" className="name-submit">Zmień</button>
+                            </form>
+                        </div>
+                </>
             )
             }
-        </civ>
+        </>
     )
 }
 
