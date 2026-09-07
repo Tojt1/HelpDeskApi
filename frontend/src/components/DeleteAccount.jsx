@@ -1,10 +1,25 @@
 import {useState} from "react";
+import {useNavigate} from "react-router";
 
 function DeleteAccount (){
     const [open, setOpen] = useState(false)
 
     const handleDelete = async (e) => {
         e.preventDefault()
+        const navigate = useNavigate()
+
+        const token = localStorage.getItem("token")
+
+        const response = await fetch("http://localhost:8000/me/delete", {
+            method: "DELETE",
+            headers:{
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        if (response.ok){
+            alert("Pomyślnie usunięto konto")
+            navigate("/")
+        }
     }
 
     return(
