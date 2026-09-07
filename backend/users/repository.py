@@ -161,3 +161,19 @@ def changeName(newName, user_id):
         except Exception as e:
             print("Błąd", e)
             # raise odpowiedni error
+
+def deleteAccount(user_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("DELETE FROM users WHERE user_id =%s", (user_id, ))
+
+            conn.commit()
+
+            return cur.rowcount == 1
+
+        except Exception as e:
+            print("Błąd", e)
+            conn.rollback()
+            #odpowiedni raise

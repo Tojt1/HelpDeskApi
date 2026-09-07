@@ -134,3 +134,14 @@ def change_user_name(data: ChangeName, token = Depends(oauth2)):
     except Exception as e:
         print("Błąd", e)
         #HTTPRESPONSE z odpowiednim bledem
+
+@router_user.delete("/me/delete")
+def delete_user_account(token = Depends(oauth2)):
+    try:
+        service.delete_account(token)
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )

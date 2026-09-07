@@ -9,7 +9,7 @@ import datetime
 
 def register_user(user):
     try:
-        ensuer_email_not_exists(user.email)
+        ensure_email_not_exists(user.email)
         valid_password(user.password)
         hashed_password = hash_password(user.password)
         repository.create_user(user, hashed_password)
@@ -53,12 +53,12 @@ def check_password(password:str, hashed_password:str) ->bool:
     return bcrypt.checkpw(bpassword, hashed_password.encode("utf-8"))
 
 
-def ensuer_email_not_exists(email):
+def ensure_email_not_exists(email):
     result = repository.check_user_email(email)
     if result is not None:
         raise exceptions.UserAlreadyExistsError("Ten email jest już zajęty")
 
-def ensuer_email_exists(email):
+def ensure_email_exists(email):
     result = repository.check_user_password(email)
     if result is None:
         raise exceptions.EmaildoesnotExistsError("Nie ma takiego e-maila")
@@ -97,7 +97,7 @@ def decode_token(token):
 
 def login_user(user):
     try:
-        result = ensuer_email_exists(user.email)
+        result = ensure_email_exists(user.email)
         if check_password(user.password, result[0]):
             return {"token":create_jwt_toc(result, user.email)}
         else:
@@ -128,7 +128,7 @@ def change_email(data, token):
     try:
         user = decode_token(token)
         user_email = user["email"]
-        ensuer_email_not_exists(data.new_email)
+        ensure_email_not_exists(data.new_email)
         if user_email != data.old_email:
             raise exceptions.DiffrentEmailError("Podałeś ten sam email")
         if user_email == data.new_email:
@@ -175,4 +175,14 @@ def change_name(data,token):
     except Exception as e:
         print("Błąd", e)
         # Dodać raise eeror
+
+def delete_account(token):
+    try:
+        user = decode_token(token)
+        if not ensure_email_exists(user["email"]):
+            raise exceptions.EmaildoesnotExistsError("Nie ma takiego e-maila")
+        if not repository.deleteAccount(user["id"]):
+            raise exceptions.UserError("Nie znaleziono użytkownika")
+    except Exception as e:
+        print("Błąd", e)
 

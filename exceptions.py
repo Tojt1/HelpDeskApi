@@ -72,3 +72,6 @@ class CommentDontExistaError(Exception):
 
 class CommentError(Exception):
     pass
+
+class DeleteAccountError(Exception):
+    pass
