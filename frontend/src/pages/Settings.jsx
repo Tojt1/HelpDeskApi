@@ -30,13 +30,13 @@ function Settings (){
         <div className="setting-container">
 
             <div className="setting-row">
-            <p>{informations.name}</p>
-            <ChangeEmail />
+                <p>{informations.name}</p>
+                <ChangeEmail />
             </div>
 
             <div className="setting-row">
-            <p>{informations.email}</p>
-            <ChangePassword />
+                <p>{informations.email}</p>
+                <ChangePassword />
             </div>
 
             <div className="setting-row">
@@ -45,7 +45,8 @@ function Settings (){
             </div>
 
             <div className="setting-row">
-            <p>{informations.created}</p>
+                <p>Konto stworzone: </p>
+                <p className="created-date">{new Date(informations.created).toLocaleDateString("pl-PL")}</p>
             </div>
 
             <DeleteAccount />

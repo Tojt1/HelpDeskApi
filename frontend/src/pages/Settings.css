@@ -1,15 +1,26 @@
 .setting-container{
+    position: fixed;
     display: flex;
     flex-direction: column;
+    gap: 20px;
 
-    margin: 50px auto;
-    padding: 30px;
+    top: 30%;
+    left: 38%;
 
-    font-size: 19px;
+    color: white;
 }
 
 .setting-row{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+}
+
+.setting-row p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.created-date{
+    color: mediumpurple;
 }

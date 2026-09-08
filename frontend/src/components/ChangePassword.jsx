@@ -32,7 +32,7 @@ function ChangePassword() {
 
     return (
         <>
-            <button onClick={() => setOpen(true)}>Zmień</button>
+            <button className="password-btn" onClick={() => setOpen(true)}>Zmień</button>
 
 
             {open && (
