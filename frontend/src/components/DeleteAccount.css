@@ -59,7 +59,7 @@
     justify-content: center;
     margin-top: 45px;
 }
-.deletea-btn{
+.delete-btn{
     color: white;
     background-color: red;
     border: none;
@@ -69,7 +69,7 @@
     width: 80px;
     font-size: 15px;
 }
-.deletea-btn:hover{
+.delete-btn:hover{
     background-color: #BA0606FF;
     transform: translateY(-0.5px);
 }

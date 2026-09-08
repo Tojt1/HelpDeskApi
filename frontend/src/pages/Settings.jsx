@@ -30,17 +30,18 @@ function Settings (){
         <div className="setting-container">
 
             <div className="setting-row">
-                <p>{informations.name}</p>
+                <p>{informations.email}:</p>
                 <ChangeEmail />
             </div>
 
             <div className="setting-row">
-                <p>{informations.email}</p>
+                <p>Password:</p>
+                <p>***********</p>
                 <ChangePassword />
             </div>
 
             <div className="setting-row">
-                <p>{informations.name}</p>
+                <p>{informations.name}: </p>
                 <ChangeName />
             </div>
 

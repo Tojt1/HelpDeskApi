@@ -16,7 +16,7 @@ def sendWelocme_email(user_email):
         """
     }
 
-    email = resend.Emails.send(params)
+    resend.Emails.send(params)
 
 
 def sendDelete_email(user_email):
