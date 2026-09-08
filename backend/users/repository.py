@@ -167,7 +167,7 @@ def deleteAccount(user_id):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("DELETE FROM users WHERE user_id =%s", (user_id, ))
+            cur.execute("DELETE FROM users WHERE id =%s", (user_id, ))
 
             conn.commit()
 

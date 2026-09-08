@@ -4,10 +4,10 @@ import "./DeleteAccount.css"
 
 function DeleteAccount (){
     const [open, setOpen] = useState(false)
+    const navigate = useNavigate()
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        const navigate = useNavigate()
 
         const token = localStorage.getItem("token")
 
@@ -19,6 +19,7 @@ function DeleteAccount (){
         })
         if (response.ok){
             alert("Pomyślnie usunięto konto")
+            localStorage.removeItem("token")
             navigate("/")
         }
     }
