@@ -1,11 +1,10 @@
-
-
 import bcrypt
 from backend.users import repository
 import jwt
 import config
 import exceptions
 import datetime
+import backend.sen_emails as send_emails
 
 def register_user(user):
     try:
@@ -13,6 +12,7 @@ def register_user(user):
         valid_password(user.password)
         hashed_password = hash_password(user.password)
         repository.create_user(user, hashed_password)
+        send_emails.sendWelocme_email(user.email)
 
     except exceptions.UserAlreadyExistsError:
         raise
@@ -183,6 +183,9 @@ def delete_account(token):
             raise exceptions.EmaildoesnotExistsError("Nie ma takiego e-maila")
         if not repository.deleteAccount(user["id"]):
             raise exceptions.UserError("Nie znaleziono użytkownika")
+
+        send_emails.sendDelete_email(user["email"])
+
     except Exception as e:
         print("Błąd", e)
 
