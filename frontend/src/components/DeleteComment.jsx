@@ -3,7 +3,7 @@ import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
 import "./DeleteComment.css"
 
-function DeleteComment ({ commentId }) {
+function DeleteComment ({ commentId, onDelete }) {
     const [open, setOpen] = useState(false)
     const { ticket_id } = useParams()
 
@@ -13,14 +13,17 @@ function DeleteComment ({ commentId }) {
         const token = localStorage.getItem("token")
         const user = jwtDecode(token)
 
-        const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/${commentId}`,
+
+        const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments/${commentId}`,
             {
+                method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             })
         if (response.ok){
             alert("Pomyślnie usunięto komentarz")
+            onDelete(commentId)
         }
     }
 

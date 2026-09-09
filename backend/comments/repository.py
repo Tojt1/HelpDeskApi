@@ -41,7 +41,7 @@ def delete_comm(comm_id):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("DELETE FROM tickets WHERE id = %s", (comm_id, ))
+            cur.execute("DELETE FROM comment WHERE id = %s", (comm_id, ))
             conn.commit()
             return True
 

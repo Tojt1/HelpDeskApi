@@ -3,7 +3,7 @@ import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
 import "./AddComment.css"
 
-function AddComment (){
+function AddComment ({ onAdd }){
     const [open, setOpen] = useState(false)
     const [content, setContent] = useState("")
     const {ticket_id} = useParams()
@@ -32,6 +32,7 @@ function AddComment (){
         if (response.ok){
             alert("Pomyślnie dodano komentarz")
             setOpen(false)
+            onAdd()
         }
         else{
             const data = response.json()

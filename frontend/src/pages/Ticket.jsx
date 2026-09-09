@@ -10,9 +10,27 @@ function Ticket (){
     const [ticket, setTicket] = useState([])
     const [comments, setComments] = useState([])
 
+    const token = localStorage.getItem("token")
+    const users = jwtDecode(token)
+
+    const handleDelete = (commentId) => {
+
+        setComments((oldcomments) => {
+            return oldcomments.filter((comment) => comment.id != commentId)
+        })
+    }
+
+    const getComments = async() => {
+            const response = await fetch(`http://localhost:8000/tickets/${users["id"]}/${ticket_id}/comments`, {
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            setComments(data)
+        }
+
     useEffect(() => {
-        const token = localStorage.getItem("token")
-        const users = jwtDecode(token)
         const getTicket = async () => {
             const respone = await fetch(`http://localhost:8000/tickets/${users["id"]}/${ticket_id}`, {
                 headers: {
@@ -24,15 +42,6 @@ function Ticket (){
         }
         getTicket();
 
-        const getComments = async() => {
-            const response = await fetch(`http://localhost:8000/tickets/${users["id"]}/${ticket_id}/comments`, {
-                headers:{
-                    "Authorization":`Bearer ${token}`
-                }
-            })
-            const data = await response.json()
-            setComments(data)
-        }
         getComments();
 
     }, []);
@@ -59,7 +68,7 @@ function Ticket (){
                 <span>Status
                 <strong>{ticket.status}</strong> </span>
             </div>
-            <AddComment />
+            <AddComment onAdd={getComments}/>
 
             <div className="comments">
                 {comments.map((comment) =>(
@@ -70,7 +79,7 @@ function Ticket (){
 
                         <p>{comment.content}</p>
 
-                        <DeleteComment commentId={comment.id} />
+                        <DeleteComment commentId={comment.id} onDelete={handleDelete} />
                     </div>
                 ))}
             </div>
