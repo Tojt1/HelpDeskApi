@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
+import "./DeleteComment.css"
 
 function DeleteComment ({ commentId }) {
     const [open, setOpen] = useState(false)
@@ -25,7 +26,7 @@ function DeleteComment ({ commentId }) {
 
     return(
         <>
-            <button className="deletec-open" onClick={() => setOpen(true)}></button>
+            <button className="deletec-open" onClick={() => setOpen(true)}>Usuń</button>
 
             {open && (
                 <>

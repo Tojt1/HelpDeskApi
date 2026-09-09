@@ -1,0 +1,10 @@
+.deletec-open{
+    color: white;
+    background-color: red;
+
+    border: none;
+    border-radius: 20px;
+
+    font-size: 13px;
+    width: 300px;
+}
