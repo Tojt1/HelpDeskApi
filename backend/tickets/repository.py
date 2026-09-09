@@ -125,3 +125,18 @@ def get_tickets_by_user(user_id):
 
         finally:
             pool.putconn(conn)
+
+def delete_ticket(ticket_id):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute("DELETE FROM tickets WHERE id =%s", (ticket_id, ))
+            conn.commit()
+        except Exception as e:
+            #Zwrócić odpowiedni błąd
+            conn.rollback()
+            print()
+
+        finally:
+            pool.putconn(conn)

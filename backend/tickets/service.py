@@ -114,3 +114,13 @@ def get_tickets_by_user(token):
     except Exception as e:
         print("Error", e)
         raise exceptions.DbDownloadError("Wystąpił  błąd pocxas pobierania ticketów")
+
+def delete_ticket(user_id, ticket_id, token):
+    user = decode_token(token)
+
+    if user["id"] != user_id:
+        raise exceptions.UserError("")
+    if not check_ticket_exist(ticket_id):
+        return {"error":"Nie ma takiego ticketu"}
+
+    return repository.delete_ticket(ticket_id)

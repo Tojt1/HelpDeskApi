@@ -19,20 +19,6 @@ def create_ticket(ticket:CreateTicket, token = Depends(oauth2)):
             detail= str(e)
         )
 
-# Get all tickets for admins
-@router_ticket.get("/tickets")
-def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
-    try:
-        if status is None:
-            return service.get_all_tickets(limit, page, sort)
-        else:
-            return service.get_all_tickets_by_status(status, sort, limit, page)
-    except exceptions.DbDownloadError as e:
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-
 # Get all tickets from specific user
 @router_ticket.get("/tickets/{user_id}")
 def get_ticket_by_user(user_id = Depends(oauth2)):
@@ -49,7 +35,35 @@ def get_ticket_by_id(ticket_id:int , user = Depends(oauth2)):
             detail= str(e)
         )
 
-#Assign agnet to the ticket
+
+@router_ticket.delete("/tickets/{user_id}/{ticket_id}")
+def delete_ticket_by_user(user_id:int, ticket_id:int, token= Depends(oauth2)):
+    try:
+        return service.delete_ticket(user_id, ticket_id, token)
+
+    except Exception as e:
+        #Obsługa odpowiednch błędów
+        print()
+
+
+
+#// Admin segment \\
+
+
+# Get all tickets for admins
+@router_ticket.get("/tickets")
+def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
+    try:
+        if status is None:
+            return service.get_all_tickets(limit, page, sort)
+        else:
+            return service.get_all_tickets_by_status(status, sort, limit, page)
+    except exceptions.DbDownloadError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e))
+
+
 @router_ticket.patch("/tickets/{ticket_id}/assign")
 def assign_agent(ticket_id:int, jwt_code):
     try:
