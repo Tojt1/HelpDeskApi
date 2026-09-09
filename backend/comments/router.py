@@ -49,10 +49,10 @@ def get_comments_to_ticket(user_id:int, ticket_id:int, token = Depends(oauth2)):
         )
 
 # Delete comment
-@comments_router.delete("/tickets/{ticket_id}/comments/{comment_id}")
-def delete_comment_from_ticket(ticket_id, comment_id):
+@comments_router.delete("/tickets/{user_id}/{ticket_id}/comments/{comment_id}")
+def delete_comment_from_ticket(user_id:int, ticket_id:int, comment_id:int, token = Depends(oauth2)):
     try:
-        return service.delete_comment(ticket_id, comment_id)
+        return service.delete_comment(user_id,ticket_id, comment_id, token)
     except exceptions.DbDeleteError as e:
         return HTTPException(
             status_code=400,

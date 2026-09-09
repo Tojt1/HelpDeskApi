@@ -51,7 +51,10 @@ def get_all_comments(ticket_id, user_id, token):
         print("Błąd", e)
 
 # Logistic for deleting comment
-def delete_comment(ticket_id, comment_id):
+def delete_comment(user_id, ticket_id, comment_id, token):
+    user = decode_token(token)
+    if not user["id"] == user_id:
+        raise exceptions.UserError("Wystąpił błąd podczas usuwania komentarza")
     if not check_ticket_exist(ticket_id):
         raise exceptions.TicketDontExistsError("Nie ma takiego Ticketu")
     if not check_ticket_is_close(ticket_id):
