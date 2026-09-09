@@ -1,4 +1,4 @@
-import Tickets from "../components/Tickets.jsx";
+import Tickets from "./Tickets.jsx";
 import "./Dashboard.css"
 
 function Dashboard(){

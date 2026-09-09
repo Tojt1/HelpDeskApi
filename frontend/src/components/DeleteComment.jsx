@@ -1,10 +1,26 @@
 import {useState} from "react";
+import {jwtDecode} from "jwt-decode";
+import {useParams} from "react-router";
 
-function DeleteComment () {
+function DeleteComment ({ commentId }) {
     const [open, setOpen] = useState(false)
+    const { ticket_id } = useParams()
 
     const HandleDelete = async (e) => {
         e.preventDefault()
+
+        const token = localStorage.getItem("token")
+        const user = jwtDecode(token)
+
+        const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/${commentId}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+        if (response.ok){
+            alert("Pomyślnie usunięto komentarz")
+        }
     }
 
     return(

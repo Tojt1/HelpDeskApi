@@ -10,7 +10,7 @@ import Usermenu from "./components/Usermenu.jsx";
 import CreateTicket from "./pages/CreateTicket.jsx";
 import CreateTicketButton from "./components/CreateTicketButton.jsx";
 import Ticket from "./pages/Ticket.jsx";
-import Tickets from "./components/Tickets.jsx";
+import Tickets from "./pages/Tickets.jsx";
 
 function App() {
 

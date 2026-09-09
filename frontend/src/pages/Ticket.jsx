@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import "./Ticket.css"
 import AddComment from "../components/AddComment.jsx";
+import DeleteComment from "../components/DeleteComment.jsx";
 
 function Ticket (){
     const { ticket_id } = useParams()
@@ -68,6 +69,8 @@ function Ticket (){
                         <span>{new Date(comment.created).toLocaleDateString("pl-PL")}</span>
 
                         <p>{comment.content}</p>
+
+                        <DeleteComment commentId={comment.id} />
                     </div>
                 ))}
             </div>
