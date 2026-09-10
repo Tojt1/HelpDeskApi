@@ -1,0 +1,19 @@
+.deletet-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 70px;
+
+    background-color: red;
+    color: white;
+
+    bordeR: none;
+    border-radius: 20px;
+
+    font-size: 15px;
+    width: 100px;
+    height: 20px;
+
+
+}

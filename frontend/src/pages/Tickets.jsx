@@ -1,6 +1,7 @@
 import {useState, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
 import {useNavigate} from "react-router";
+import DeleteTicket from "../components/DeleteTicket.jsx";
 import "./Tickets.css"
 
 
@@ -37,6 +38,7 @@ function Tickets(){
 
                             <p>{ticket.description}</p>
                             <span>Utworzono: {" "} {new Date(ticket.created).toLocaleDateString("pl-PL")}</span>
+                            <DeleteTicket />
                         </div>
                     </div>
                 ))}
