@@ -4,6 +4,7 @@ import jwt
 import config
 import exceptions
 import datetime
+from datetime import timezone
 import backend.sen_emails as send_emails
 
 def register_user(user):
@@ -92,6 +93,12 @@ def create_jwt_toc(user, email):
 
 def decode_token(token):
     result = jwt.decode(token, config.SECRET_KEY, algorithms=["HS256"])
+
+    create_date = datetime.datetime.fromtimestamp(result["exp"], timezone.utc)
+    today = datetime.datetime.now(timezone.utc)
+    time_left = create_date - today
+    if time_left.total_seconds() <= 0:
+        raise exceptions.JWTTicketTimeIsOutError("JWT się skończył")
     return result
 
 

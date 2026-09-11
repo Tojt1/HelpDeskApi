@@ -75,3 +75,6 @@ class CommentError(Exception):
 
 class DeleteAccountError(Exception):
     pass
+
+class JWTTicketTimeIsOutError(Exception):
+    pass
