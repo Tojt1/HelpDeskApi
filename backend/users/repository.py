@@ -155,7 +155,7 @@ def changeName(newName, user_id):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("UPDATE userse SET name =%s WHERE id =%s", (newName, user_id))
+            cur.execute("UPDATE users SET name =%s WHERE id =%s", (newName, user_id))
             conn.commit()
 
         except Exception as e:
