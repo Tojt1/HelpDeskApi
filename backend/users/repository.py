@@ -160,7 +160,7 @@ def changeName(newName, user_id):
 
         except Exception as e:
             print("Błąd", e)
-            # raise odpowiedni error
+            raise exceptions.ChangeNameError("Wystąpił błąd podczas zmiany nazyw")
 
 def deleteAccount(user_id):
     conn = pool.getconn()
@@ -176,4 +176,4 @@ def deleteAccount(user_id):
         except Exception as e:
             print("Błąd", e)
             conn.rollback()
-            #odpowiedni raise
+            raise exceptions.DeleteAccountError("Wystąpił błąd podczas usuwania konta")

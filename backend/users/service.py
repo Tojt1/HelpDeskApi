@@ -177,13 +177,12 @@ def change_name(data,token):
     try:
         user = decode_token(token)
         if data.new_name == data.old_name:
-            #raise odpowiedni błąd
-            pass
+            raise exceptions.ThisSameThingError("Nowa nazwa musi być inna od poprzedniej")
         if repository.changeName(data.new_name, user["id"]):
             return {"token": create_jwt_toc(["t", user["id"], data.new_name], user["email"])}
     except Exception as e:
         print("Błąd", e)
-        # Dodać raise eeror
+        raise exceptions.ChangeNameError("Wystąpił błąd podczas zmiany nazwy")
 
 def delete_account(token):
     try:

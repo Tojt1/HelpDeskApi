@@ -130,14 +130,40 @@ def change_user_name(data: ChangeName, token = Depends(oauth2)):
     try:
         return service.change_name(data, token)
 
+    except exceptions.ThisSameThingError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
     except Exception as e:
-        print("Błąd", e)
-        #HTTPRESPONSE z odpowiednim bledem
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
 
 @router_user.delete("/me/delete")
 def delete_user_account(token = Depends(oauth2)):
     try:
         service.delete_account(token)
+
+    except exceptions.EmaildoesnotExistsError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
+    except exceptions.UserError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
+    except exceptions.DeleteAccountError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
 
     except Exception as e:
         raise HTTPException(

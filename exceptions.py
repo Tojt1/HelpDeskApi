@@ -78,3 +78,9 @@ class DeleteAccountError(Exception):
 
 class JWTTicketTimeIsOutError(Exception):
     pass
+
+class ChangeNameError(Exception):
+    pass
+
+class ThisSameThingError(Exception):
+    pass
