@@ -141,7 +141,8 @@ def change_email(data, token):
         if user_email == data.new_email:
             raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
 
-        repository.changeEmail(user["id"], data.new_email)
+        if repository.changeEmail(user["id"], data.new_email):
+            return {"token":create_jwt_toc(["t", user["id"], user["name"]], data.new_email)}
 
     except Exception as e:
         print("Error", e)
@@ -152,7 +153,6 @@ def change_password(data, token):
     try:
         user = decode_token(token)
         valid_password(data.new_password)
-
         if data.new_password == data.old_password:
             raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
 
@@ -162,6 +162,7 @@ def change_password(data, token):
             raise exceptions.NotTheSamePasswordError("Podano nieprawidłowe hasło")
         if check_password(data.new_password, user_inf[0]):
             raise exceptions.ThisSamePasswordError("To hasło było już przez ciebie użyte")
+
 
         hashed_password = hash_password(data.new_password)
 
@@ -178,7 +179,8 @@ def change_name(data,token):
         if data.new_name == data.old_name:
             #raise odpowiedni błąd
             pass
-        return repository.changeName(data.new_name, user["id"])
+        if repository.changeName(data.new_name, user["id"]):
+            return {"token": create_jwt_toc(["t", user["id"], data.new_name], user["email"])}
     except Exception as e:
         print("Błąd", e)
         # Dodać raise eeror

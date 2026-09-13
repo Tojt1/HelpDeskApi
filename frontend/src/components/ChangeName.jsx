@@ -16,6 +16,7 @@ function ChangeName() {
 
         const token = localStorage.getItem("token")
 
+
         const response = await fetch("http://localhost:8000/me/name", {
             method: "PATCH",
             headers:{
@@ -28,7 +29,10 @@ function ChangeName() {
                 })
         })
         if (response.ok){
+            const data = await response.json()
+            localStorage.setItem("token", data.token)
             alert("Pomyślnie zmieniono imie")
+            setOpen(false)
         }
 
     }

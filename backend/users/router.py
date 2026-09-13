@@ -99,6 +99,8 @@ def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
 
 @router_user.patch("/me/password")
 def change_user_password(data: ChangePassword, user = Depends(oauth2)):
+    print(data)
+    print("---")
     try:
         service.change_password(data, user)
         return {"information": "Udało się zmienić hasło"}
