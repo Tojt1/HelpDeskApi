@@ -32,7 +32,10 @@ function ChangeEmail(){
         })
 
         if (response.ok){
+            const data = response.json()
+            localStorage.setItem("token", data.token)
             alert("Pomyślnie zmieniono email")
+            setOpen(false)
         }
         else{
             const data = response.json()

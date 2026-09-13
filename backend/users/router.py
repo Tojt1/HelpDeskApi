@@ -18,7 +18,6 @@ def get_users():
 @router_user.post("/register")
 def sign_up(user:RegisterUser):
     try:
-        print("1")
         service.register_user(user)
         return {"information": "Pomyslnie stworzono użytkownika"}, 200
     except exceptions.UserAlreadyExistsError:
@@ -70,8 +69,7 @@ def get_user_inf(token = Depends(oauth2)):
 @router_user.patch("/me/email")
 def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
     try:
-        service.change_email(new_email, token)
-        return {"information": "Pomyślnie zmieniono email"}, 200
+        return service.change_email(new_email, token)
 
     except exceptions.ChangeEmailError:
         raise HTTPException(
@@ -99,8 +97,6 @@ def change_user_email(new_email: ChangeEmail , token = Depends(oauth2)):
 
 @router_user.patch("/me/password")
 def change_user_password(data: ChangePassword, user = Depends(oauth2)):
-    print(data)
-    print("---")
     try:
         service.change_password(data, user)
         return {"information": "Udało się zmienić hasło"}
@@ -132,7 +128,8 @@ def change_user_password(data: ChangePassword, user = Depends(oauth2)):
 @router_user.patch("/me/name")
 def change_user_name(data: ChangeName, token = Depends(oauth2)):
     try:
-        service.change_name(data, token)
+        return service.change_name(data, token)
+
     except Exception as e:
         print("Błąd", e)
         #HTTPRESPONSE z odpowiednim bledem
