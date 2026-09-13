@@ -5,15 +5,7 @@ import exceptions
 from authorisation import oauth2
 router_user = APIRouter()
 
-@router_user.get("/")
-def get_users():
-    try:
-        return service.load_all_users()
-    except exceptions.DbDownloadError as e :
-        return HTTPException(
-            status_code=400,
-            detail= str(e)
-        )
+
 
 @router_user.post("/register")
 def sign_up(user:RegisterUser):
