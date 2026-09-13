@@ -2,8 +2,8 @@ import {useParams} from "react-router";
 import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import "./Ticket.css"
-import AddComment from "../components/AddComment.jsx";
-import DeleteComment from "../components/DeleteComment.jsx";
+import AddComment from "../../components/users/AddComment.jsx";
+import DeleteComment from "../../components/commons/DeleteComment.jsx";
 
 function Ticket (){
     const { ticket_id } = useParams()

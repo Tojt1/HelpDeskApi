@@ -1,7 +1,7 @@
 import {useState, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
 import {useNavigate} from "react-router";
-import DeleteTicket from "../components/DeleteTicket.jsx";
+import DeleteTicket from "../../components/commons/DeleteTicket.jsx";
 import "./Tickets.css"
 
 

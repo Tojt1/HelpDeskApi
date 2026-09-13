@@ -1,9 +1,9 @@
 import {useEffect} from "react";
 import {useState} from "react";
-import ChangeEmail from "../components/ChangeEmail.jsx";
-import ChangePassword from "../components/ChangePassword.jsx";
-import ChangeName from "../components/ChangeName.jsx";
-import DeleteAccount from "../components/DeleteAccount.jsx";
+import ChangeEmail from "../../components/commons/ChangeEmail.jsx";
+import ChangePassword from "../../components/commons/ChangePassword.jsx";
+import ChangeName from "../../components/commons/ChangeName.jsx";
+import DeleteAccount from "../../components/commons/DeleteAccount.jsx";
 import "./Settings.css"
 
 function Settings (){
