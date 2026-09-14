@@ -68,14 +68,12 @@ def ensure_email_exists(email):
 
 
 
-
-
-
 def create_jwt_toc(user, email):
     token = jwt.encode(
         {"id": user[1],
          "name": user[2],
          "email": email,
+         "role": user[3],
          "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=300)},
         config.SECRET_KEY,
         algorithm="HS256"
@@ -133,7 +131,7 @@ def change_email(data, token):
             raise exceptions.EmailisCurrentlyUseError("Nie można użyć tego e-maila")
 
         if repository.changeEmail(user["id"], data.new_email):
-            return {"token":create_jwt_toc(["t", user["id"], user["name"]], data.new_email)}
+            return {"token":create_jwt_toc(["t", user["id"], user["name"], user["role"]], data.new_email)}
 
     except Exception as e:
         print("Error", e)
@@ -170,7 +168,7 @@ def change_name(data,token):
         if data.new_name == data.old_name:
             raise exceptions.ThisSameThingError("Nowa nazwa musi być inna od poprzedniej")
         if repository.changeName(data.new_name, user["id"]):
-            return {"token": create_jwt_toc(["t", user["id"], data.new_name], user["email"])}
+            return {"token": create_jwt_toc(["t", user["id"], data.new_name, user["role"]], user["email"])}
     except Exception as e:
         print("Błąd", e)
         raise exceptions.ChangeNameError("Wystąpił błąd podczas zmiany nazwy")

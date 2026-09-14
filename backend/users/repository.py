@@ -37,7 +37,7 @@ def check_user_password(email):
 
     with conn.cursor() as cur:
         try:
-            cur.execute("SELECT password, id, name FROM users WHERE email = %s", (email,))
+            cur.execute("SELECT password, id, name, role FROM users WHERE email = %s", (email,))
             res = cur.fetchone()
 
             return res
