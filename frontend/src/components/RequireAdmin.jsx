@@ -1,13 +1,25 @@
 import {jwtDecode} from "jwt-decode";
-import {useNavigate} from "react-router";
+import {Navigate, Outlet} from "react-router";
 
 function RequireAdmin () {
-    const navigate = useNavigate()
 
     const token = localStorage.getItem("token")
 
+
     if (!token){
-        navigate("/login")
+        return <Navigate to="/login" replace />
     }
 
+    const user = jwtDecode(token)
+    try {
+        if (user.role !== "ADMIN") {
+            return <Navigate to="/dashboard" replace/>
+        }
+        return <Outlet/>
+    } catch {
+        localStorage.removeItem("token")
+        return <Navigate to="/login" replace />
+    }
 }
+
+export default RequireAdmin
