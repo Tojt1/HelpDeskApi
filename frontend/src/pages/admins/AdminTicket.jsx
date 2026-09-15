@@ -5,6 +5,7 @@ import {useParams} from "react-router";
 function AdminTicket (){
     const [showButton, setShowButton] = useState(false)
     const [ticket, setTicket] = useState([])
+    const [comments, setComments] = useState([])
     const token = localStorage.getItem("token")
     let user = jwtDecode(token)
     let { ticket_id } = useParams()
@@ -22,7 +23,19 @@ function AdminTicket (){
             }
             setTicket(data)
         }
+         const getComments = async() => {
+            const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments`, {
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+             console.log(data)
+            setComments(data)
+        }
         getTicket()
+
+        getComments()
     }, []);
 
     return(
@@ -38,6 +51,17 @@ function AdminTicket (){
             <div className="aticket-information">
                 <span>Ostatnia aktualizacja: <strong>{new Date(ticket.updated).toLocaleDateString("pl-PL")}</strong></span>
                 <p>Status: {ticket.status}</p>
+            </div>
+            <div className="acomments">
+                {comments.map((comment) => (
+                    <div className="acomment-card" key={comment.id}>
+                        <span>{comment.author_name}</span>
+
+                        <span>{new Date(comment.created).toLocaleDateString("pl-PL")}</span>
+
+                        <p>{comment.content}</p>
+                    </div>
+                ))}
             </div>
             {showButton &&(
                 <div className="aticket-btns">

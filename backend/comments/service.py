@@ -34,9 +34,6 @@ def get_all_comments(ticket_id, user_id, token):
         rows = repository.get_all_comments(ticket_id)
         user_name = getname(user_id)
 
-        if not rows:
-            return {"information": "Nie ma tutaj jeszcze komentazry"}
-
         return [{
             "id":row[0],
             "content":row[1],
