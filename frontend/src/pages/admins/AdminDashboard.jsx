@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
 import "./AdminDashboard.css"
 
 function AdminDashboard (){
@@ -15,6 +16,7 @@ function AdminDashboard (){
             })
             if (response.ok){
                 const data = await response.json()
+                console.log(data)
                 setTickets(data)
             }
         }
@@ -30,8 +32,15 @@ function AdminDashboard (){
                         <h2>{ticket.title}</h2>
 
                         <p>{ticket.description}</p>
-                        <span>Utworzono: {new Date(ticket.created).toLocaleDateString("pl-PL")}</span>
-                        <span>Agent: {ticket.agent}</span>
+                        <div className="aticket-date">
+                            <span>Utworzono: {new Date(ticket.created).toLocaleDateString("pl-PL")}</span>
+                        </div>
+                        <div className="aticket-info">
+                            <span>Agent: {ticket.agent}</span>
+                             <span className={`aticket-status ${ticket.status.toLowerCase()}`}>
+                                 {ticket.status}
+                             </span>
+                         </div>
                     </div>
                 </div>
             ))}
