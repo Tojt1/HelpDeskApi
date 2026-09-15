@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import "./AdminDashboard.css"
 
 function AdminDashboard (){
     const [tickets, setTickets] = useState([])

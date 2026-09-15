@@ -9,7 +9,7 @@ import { Routes, Route} from "react-router";
 import CreateTicket from "./pages/users/CreateTicket.jsx";
 import Ticket from "./pages/users/Ticket.jsx";
 import RequireAdmin from "./components/RequireAdmin.jsx";
-import AdminDashboard from "./pages/AdminDashboard.jsx";
+import AdminDashboard from "./pages/admins/AdminDashboard.jsx";
 import UserLayout from "./components/users/UserLayout.jsx";
 
 function App() {
