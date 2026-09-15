@@ -12,7 +12,7 @@ function Ticket (){
 
     const token = localStorage.getItem("token")
     const users = jwtDecode(token)
-    console.log(users)
+
 
     const handleDelete = (commentId) => {
 

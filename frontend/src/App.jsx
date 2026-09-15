@@ -11,6 +11,7 @@ import Ticket from "./pages/users/Ticket.jsx";
 import RequireAdmin from "./components/RequireAdmin.jsx";
 import AdminDashboard from "./pages/admins/AdminDashboard.jsx";
 import UserLayout from "./components/users/UserLayout.jsx";
+import AdminTicket from "./pages/admins/AdminTicket.jsx";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
 
               <Route element={<RequireAdmin />}>
                   <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+                  <Route path="/admin/:ticket_id" element={<AdminTicket />}></Route>
               </Route>
 
           </Route>
