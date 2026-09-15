@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
+import "./AdminTicket.css"
 
 function AdminTicket (){
     const [showButton, setShowButton] = useState(false)
