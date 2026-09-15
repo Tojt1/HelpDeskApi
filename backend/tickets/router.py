@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from backend.tickets.schemas import CreateTicket
 from backend.tickets import service
 from typing import Optional
-from authorisation import oauth2
+from authorisation import oauth2, require_admin
 import exceptions
+from backend.admins.router import router_admin
 
 router_ticket = APIRouter()
 
@@ -47,11 +48,13 @@ def delete_ticket_by_user(user_id:int, ticket_id:int, token= Depends(oauth2)):
 
 
 
+
+
 #// Admin segment \\
 
 
 # Get all tickets for admins
-@router_ticket.get("/tickets")
+@router_admin.get("/tickets")
 def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
     try:
         if status is None:
@@ -64,7 +67,7 @@ def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 
             detail=str(e))
 
 
-@router_ticket.patch("/tickets/{ticket_id}/assign")
+@router_admin.patch("/tickets/{ticket_id}/assign")
 def assign_agent(ticket_id:int, jwt_code):
     try:
         return service.assign_agent(ticket_id, jwt_code)

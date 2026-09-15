@@ -1,8 +1,11 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function AdminDashboard (){
     const [tickets, setTickets] = useState([])
 
+    useEffect(() => {
+
+    }, []);
     return (
         <div className="adashboard-container">
             {tickets.map((ticket)=>(

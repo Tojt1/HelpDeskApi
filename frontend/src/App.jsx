@@ -6,11 +6,11 @@ import Dashboard from "./pages/users/Dashboard.jsx";
 import CheckLogged from "./components/users/CheckLogged.jsx";
 import Settings from "./pages/commons/Settings.jsx";
 import { Routes, Route} from "react-router";
-import Usermenu from "./components/users/Usermenu.jsx";
 import CreateTicket from "./pages/users/CreateTicket.jsx";
-import CreateTicketButton from "./components/users/CreateTicketButton.jsx";
 import Ticket from "./pages/users/Ticket.jsx";
-import Tickets from "./pages/users/Tickets.jsx";
+import RequireAdmin from "./components/RequireAdmin.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import UserLayout from "./components/users/UserLayout.jsx";
 
 function App() {
 
@@ -20,17 +20,20 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<RegisterUser />}/>
 
-          <Route element={<>
-              <CheckLogged />
-              <Usermenu />
-              <CreateTicketButton />
-          </>
-          }>
+          <Route element={<CheckLogged />} >
 
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/me" element={<Settings />}/>
-              <Route path="/createTicket" element={<CreateTicket />}/>
-              <Route path="/tickets/:ticket_id" element={<Ticket />}/>
+              <Route element={<UserLayout />}>
+
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/me" element={<Settings />}/>
+                  <Route path="/createTicket" element={<CreateTicket />}/>
+                  <Route path="/tickets/:ticket_id" element={<Ticket />}/>
+              </Route>
+
+              <Route element={<RequireAdmin />}>
+                  <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+              </Route>
+
           </Route>
 
       </Routes>

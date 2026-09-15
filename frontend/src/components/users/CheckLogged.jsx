@@ -1,15 +1,16 @@
-import {useNavigate, Outlet} from "react-router";
+import {Navigate, Outlet} from "react-router";
 import {jwtDecode} from "jwt-decode";
 import {useEffect} from "react";
 
-function CheckLogged ( {children}) {
-    const navigate = useNavigate()
+
+function CheckLogged () {
     const token = localStorage.getItem("token")
 
     if (! token){
-        navigate("/login")
+        return <Navigate to="/login" replace />
     }
-    const users = jwtDecode(token)
+
+    let users = jwtDecode(token)
 
     const expiretime = users.exp * 1000
     const timeleft = expiretime - Date.now()
@@ -17,17 +18,17 @@ function CheckLogged ( {children}) {
     useEffect(() => {
         if (timeleft<=0) {
             localStorage.removeItem("token")
-            navigate("/login")
+            return;
         }
 
         const timer = setTimeout(() => {
             localStorage.removeItem("token")
-            navigate("/login")
+            return <Navigate to="/login" />
         }, timeleft)
 
         return () => clearTimeout(timer)
 
-    }, [timeleft, navigate]);
+    }, [timeleft]);
 
 
     return <Outlet />
