@@ -12,7 +12,6 @@ function Tickets(){
     useEffect(() => {
         const token = localStorage.getItem("token")
         const users = jwtDecode(token)
-        console.log()
         const getData = async () => {
             const response = await fetch(`http://localhost:8000/tickets/${users["id"]}`, {
                 headers: {

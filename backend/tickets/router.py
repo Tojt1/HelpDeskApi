@@ -55,7 +55,7 @@ def delete_ticket_by_user(user_id:int, ticket_id:int, token= Depends(oauth2)):
 
 # Get all tickets for admins
 @router_admin.get("/tickets")
-def get_tickets(sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
+def get_all_tickets(token=Depends(require_admin) ,sort:str = "created", status: Optional[str] = None, limit:int = 10, page:int = 1):
     try:
         if status is None:
             return service.get_all_tickets(limit, page, sort)
