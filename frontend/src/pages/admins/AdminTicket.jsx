@@ -6,6 +6,7 @@ function AdminTicket (){
     const [showButton, setShowButton] = useState(false)
     const [ticket, setTicket] = useState([])
     const [comments, setComments] = useState([])
+    const [commentMessage, setCommentMessage] = useState("")
     const token = localStorage.getItem("token")
     let user = jwtDecode(token)
     let { ticket_id } = useParams()
@@ -30,7 +31,9 @@ function AdminTicket (){
                 }
             })
             const data = await response.json()
-             console.log(data)
+             if (data.length ==0){
+                 setCommentMessage("Nie ma tutaj jeszcze komentarzy")
+             }
             setComments(data)
         }
         getTicket()
@@ -63,6 +66,7 @@ function AdminTicket (){
                     </div>
                 ))}
             </div>
+            <p className="acomment-none">{commentMessage}</p>
             {showButton &&(
                 <div className="aticket-btns">
                     <button>Przypisz mnie</button>
