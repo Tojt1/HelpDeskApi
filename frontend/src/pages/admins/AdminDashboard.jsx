@@ -4,6 +4,7 @@ import "./AdminDashboard.css"
 
 function AdminDashboard (){
     const [tickets, setTickets] = useState([])
+    const navigate = useNavigate()
 
     useEffect( () => {
         const token = localStorage.getItem("token")
@@ -27,7 +28,7 @@ function AdminDashboard (){
     return (
         <div className="adashboard-container">
             {tickets.map((ticket)=>(
-                <div className="aticket-card" key={ticket.id}>
+                <div className="aticket-card" key={ticket.id} onClick={()=> navigate(`/tickets/${ticket.id}`)}>
                     <div className="aticket-items">
                         <h2>{ticket.title}</h2>
 
