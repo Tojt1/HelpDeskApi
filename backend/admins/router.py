@@ -15,3 +15,10 @@ def get_users():
             status_code=400,
             detail= str(e)
         )
+
+@router_admin.get("/{ticket_id}/assign")
+def assing_agent(ticket_id, user=Depends(require_admin)):
+    try:
+        service.assign_agent_to_ticket(user, ticket_id)
+    except Exception as e:
+        print("Błąd", e)

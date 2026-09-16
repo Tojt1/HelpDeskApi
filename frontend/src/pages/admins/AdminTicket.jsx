@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
 import "./AdminTicket.css"
+import AdminAsign from "../../components/AdminAsign.jsx";
 
 function AdminTicket (){
     const [showButton, setShowButton] = useState(false)
@@ -12,8 +13,7 @@ function AdminTicket (){
     let user = jwtDecode(token)
     let { ticket_id } = useParams()
 
-    useEffect(() => {
-        const getTicket = async () =>{
+    const getTicket = async () =>{
              const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}`, {
                 headers:{
                     "Authorization":`Bearer ${token}`
@@ -25,6 +25,8 @@ function AdminTicket (){
             }
             setTicket(data)
         }
+
+    useEffect(() => {
          const getComments = async() => {
             const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments`, {
                 headers:{
@@ -70,7 +72,7 @@ function AdminTicket (){
             <p className="acomment-none">{commentMessage}</p>
             {showButton &&(
                 <div className="aticket-btns">
-                    <button>Przypisz mnie</button>
+                    <AdminAsign when_clicked={getTicket} />
                 </div>
             )}
         </div>

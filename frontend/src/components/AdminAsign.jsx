@@ -1,19 +1,22 @@
+import {useParams} from "react-router";
 
-function AdminAsign (){
+function AdminAsign ({when_clicked}){
     const token = localStorage.getItem("token")
+    const { ticket_id } = useParams()
     const handleAssign = async (e) =>{
         e.preventDefault()
-        const response = await fetch("http://localhost:8000/admin/assign", {
+        const response = await fetch(`http://localhost:8000/admin/${ticket_id}/assign`, {
             headers:{
                 "Authorization":`Bearer ${token}`
             }
         })
         if (response.ok){
-            const data = response.json()
+            alert("pomyślnie przypisano agenta")
+            when_clicked()
         }
     }
     return (
-        <button className="assign-btn">Przypisz mnie</button>
+        <button className="assign-btn" onClick={handleAssign}>Przypisz mnie</button>
     )
 }
 
