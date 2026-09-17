@@ -3,15 +3,24 @@ import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router";
 import "./AdminTicket.css"
 import AdminAsign from "../../components/AdminAsign.jsx";
+import AddComment from "../../components/commons/AddComment.jsx";
+import DeleteComment from "../../components/commons/DeleteComment.jsx";
 
 function AdminTicket (){
-    const [showButton, setShowButton] = useState(false)
+    const [showassign, setShowassign] = useState(false)
+    const [showaddcomment, setshowaddcomment] = useState(false)
     const [ticket, setTicket] = useState([])
     const [comments, setComments] = useState([])
     const [commentMessage, setCommentMessage] = useState("")
     const token = localStorage.getItem("token")
     let user = jwtDecode(token)
     let { ticket_id } = useParams()
+
+    const handleDelete = (commentId) => {
+        setComments((oldComments)=>{
+            return oldComments.filter((comment)=> comment.id != commentId)
+        })
+    }
 
     const getTicket = async () =>{
              const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}`, {
@@ -21,24 +30,29 @@ function AdminTicket (){
             })
             const data = await response.json()
             if (data.agent_id == null){
-                setShowButton(true)
+                setShowassign(true)
             }
             setTicket(data)
-        }
+
+            if (data.agent_id !=  null || data.agent_id == user.id){
+                setshowaddcomment(true)
+            }
+    }
+
+     const getComments = async() => {
+        const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments`, {
+            headers:{
+                "Authorization":`Bearer ${token}`
+            }
+        })
+        const data = await response.json()
+         if (data.length ==0){
+             setCommentMessage("Nie ma tutaj jeszcze komentarzy")
+         }
+        setComments(data)
+    }
 
     useEffect(() => {
-         const getComments = async() => {
-            const response = await fetch(`http://localhost:8000/tickets/${user["id"]}/${ticket_id}/comments`, {
-                headers:{
-                    "Authorization":`Bearer ${token}`
-                }
-            })
-            const data = await response.json()
-             if (data.length ==0){
-                 setCommentMessage("Nie ma tutaj jeszcze komentarzy")
-             }
-            setComments(data)
-        }
         getTicket()
 
         getComments()
@@ -66,14 +80,21 @@ function AdminTicket (){
                         <span>{new Date(comment.created).toLocaleDateString("pl-PL")}</span>
 
                         <p>{comment.content}</p>
+
+                        <DeleteComment commentId={comment.id} onDelete={handleDelete}/>
                     </div>
                 ))}
             </div>
             <p className="acomment-none">{commentMessage}</p>
-            {showButton &&(
+            {showassign &&(
                 <div className="aticket-btns">
-                    <AdminAsign when_clicked={getTicket} />
+                    <AdminAsign when_clicked={getTicket}/>
                 </div>
+            )}
+            {showaddcomment &&(
+                <>
+                    <AddComment onAdd={getComments}/>
+                </>
             )}
         </div>
     )

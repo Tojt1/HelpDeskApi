@@ -30,8 +30,8 @@ function AddComment ({ onAdd }){
             })
         })
         if (response.ok){
-            alert("Pomyślnie dodano komentarz")
             setOpen(false)
+            setContent("")
             onAdd()
         }
         else{

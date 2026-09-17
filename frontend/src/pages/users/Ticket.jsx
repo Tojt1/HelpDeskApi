@@ -2,7 +2,7 @@ import {useParams} from "react-router";
 import {useState, useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import "./Ticket.css"
-import AddComment from "../../components/users/AddComment.jsx";
+import AddComment from "../../components/commons/AddComment.jsx";
 import DeleteComment from "../../components/commons/DeleteComment.jsx";
 
 function Ticket (){
