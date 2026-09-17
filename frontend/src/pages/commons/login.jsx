@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
+import {useNavigate, Link} from "react-router";
+import {jwtDecode} from "jwt-decode";
 import "./login.css"
-import {useNavigate} from "react-router";
-import {Link} from "react-router";
 
 function Login(){
     const navigate = useNavigate();
@@ -12,7 +12,12 @@ function Login(){
 
     useEffect(() => {
         if (localStorage.getItem("token")){
-            navigate("/dashboard")
+            let user = jwtDecode(localStorage.getItem("token"))
+            if (user.role == "ADMIN"){
+                navigate("/admin/dashboard")
+            } else{
+                navigate("/dashboard")
+            }
         }
     }, []);
 
@@ -36,12 +41,16 @@ function Login(){
 
             if (!response.ok){
                 setLoginError(data.detail || "Niepoprawny email lub hasło")
-            } else {
-
-            localStorage.setItem("token", data.token)
-
-            alert("Pomyślnie zalogowano")
-            navigate("/dashboard")
+            }
+            else {
+                localStorage.setItem("token", data.token)
+                let user = jwtDecode(data.token)
+                if (user.role == "ADMIN"){
+                    navigate("/admin/dashboard")
+                }
+                else{
+                    navigate("/dashboard")
+                }
                 }
         }
         catch (error){
