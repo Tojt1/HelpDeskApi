@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router";
 import {useState} from "react";
+import "./Adminmenu.css"
 
 function Adminmenu (){
     const [open, setOpen] = useState(false)
@@ -18,7 +19,7 @@ function Adminmenu (){
                     <div className="amenu-options">
                         <button className="amenu-tickets" onClick={()=> navigate("/admin/dashboard")}>✉️Ticket</button>
                         <button className="amenu-settings" onClick={()=> navigate("/admin/settings")}>⚙️ Ustawienia</button>
-                        <button classname="amenu-logout" onClick={handleLogout}>❌ Wyloguj się</button>
+                        <button className="amenu-logout" onClick={handleLogout}>❌ Wyloguj się</button>
                     </div>
                 )}
             </div>
