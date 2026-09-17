@@ -1,29 +1,53 @@
-.comment-open{
-    position: fixed;
-    margin: 30px auto;
+
+.ticket {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 500px;
+
+    padding: 20px;
+
+    background-color: white;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+.comment-open {
+    margin-top: auto;
+
     padding: 12px;
-    top: 650px;
-    left: 47%;
+
     display: block;
-    justify-content: center;
-    align-items: center;
 
     background-color: cornflowerblue;
 
     border: solid black 1px;
     border-radius: 10px;
+
     width: 100px;
 
     cursor: pointer;
+
+    align-self: center;
+
+    transition: 0.2s;
 }
-.comment-open:hover{
+
+.comment-open:hover {
     background-color: #4f7fd1;
     transform: translateY(-2px);
 }
 
-.comment-background{
-    position:fixed;
+
+
+.comment-background {
+    position: fixed;
     inset: 0;
+
     background: rgba(0, 0, 0, 0.5);
 
     display: flex;
@@ -31,49 +55,83 @@
     align-items: center;
 
     border: solid 1px black;
+
+    z-index: 1000;
 }
 
-.comment-container{
+
+.comment-container {
     width: 400px;
     max-width: 90%;
 
     padding: 30px;
+
     background: white;
 
     border-radius: 16px;
 
-    box-shadow: 0 10px 40px rgba(0, 0, 0 , 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    box-sizing: border-box;
 }
 
-.comment-form{
+
+
+.comment-form {
     display: flex;
     flex-direction: column;
+
     align-items: center;
+
     gap: 15px;
 }
 
-.comment-form h2{
+
+
+.comment-form h2 {
     color: black;
+
     font-size: 30px;
+
+    margin: 0;
 }
 
-.comment-form textarea{
+
+
+.comment-form textarea {
     width: 200px;
     height: 100px;
+
+    padding: 10px;
 
     color: black;
     background-color: lightgray;
 
     border: solid black 1px;
     border-radius: 8px;
-}
-.comment-form textarea:focus{
-    background-color: grey;
+
+    resize: vertical;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
 }
 
-.comment-btn{
+.comment-form textarea:focus {
+    background-color: grey;
+
+    outline: none;
+}
+
+
+.comment-btn {
     width: 120px;
+
+    padding: 10px;
+
     background-color: #2b87e7;
+
+    color: white;
 
     font-size: 16px;
 
@@ -81,8 +139,12 @@
     border-radius: 20px;
 
     cursor: pointer;
+
+    transition: 0.2s;
 }
-.comment-btn:hover{
+
+.comment-btn:hover {
     background-color: #287ace;
+
     transform: translateY(-1px);
 }
