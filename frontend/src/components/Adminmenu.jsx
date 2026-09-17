@@ -14,7 +14,7 @@ function Adminmenu (){
     return(
         <>
             <div className="amenu-container">
-                <button className="aopen-menu" onClick={()=> setOpen(true)}>👤</button>
+                <button className="aopen-menu" onClick={()=> setOpen(!open)}>👤</button>
                 {open &&(
                     <div className="amenu-options">
                         <button className="amenu-tickets" onClick={()=> navigate("/admin/dashboard")}>✉️Ticket</button>

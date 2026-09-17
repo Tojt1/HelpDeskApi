@@ -12,6 +12,7 @@ import RequireAdmin from "./components/RequireAdmin.jsx";
 import AdminDashboard from "./pages/admins/AdminDashboard.jsx";
 import UserLayout from "./components/users/UserLayout.jsx";
 import AdminTicket from "./pages/admins/AdminTicket.jsx";
+import AdminLayout from "./components/AdminLayout.jsx";
 
 function App() {
 
@@ -32,8 +33,10 @@ function App() {
               </Route>
 
               <Route element={<RequireAdmin />}>
-                  <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
-                  <Route path="/admin/:ticket_id" element={<AdminTicket />}></Route>
+                  <Route element={<AdminLayout/>}>
+                    <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+                    <Route path="/admin/:ticket_id" element={<AdminTicket />}></Route>
+                  </Route>
               </Route>
 
           </Route>

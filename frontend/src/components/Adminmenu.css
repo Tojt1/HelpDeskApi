@@ -1,9 +1,16 @@
-
 .amenu-container {
-    position: relative;
-    display: inline-block;
+    position: fixed;
+
+    top: 20px;
+    right: 80px;
+
+    z-index: 1000;
 }
 
+
+/* =========================
+   OPEN MENU BUTTON
+   ========================= */
 
 .aopen-menu {
     width: 45px;
@@ -31,6 +38,11 @@
     transform: scale(1.05);
 }
 
+
+/* =========================
+   MENU OPTIONS
+   ========================= */
+
 .amenu-options {
     position: absolute;
 
@@ -54,6 +66,11 @@
     z-index: 1000;
 }
 
+
+/* =========================
+   MENU BUTTONS
+   ========================= */
+
 .amenu-options button {
     width: 100%;
 
@@ -76,15 +93,27 @@
 }
 
 
+/* =========================
+   TICKETS
+   ========================= */
+
 .amenu-tickets:hover {
     background-color: #e5efff;
 }
 
 
+/* =========================
+   SETTINGS
+   ========================= */
+
 .amenu-settings:hover {
     background-color: #eeeeee;
 }
 
+
+/* =========================
+   LOGOUT
+   ========================= */
 
 .amenu-logout {
     color: #d32f2f !important;
