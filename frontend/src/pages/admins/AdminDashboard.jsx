@@ -37,7 +37,7 @@ function AdminDashboard (){
                             <span>Utworzono: {new Date(ticket.created).toLocaleDateString("pl-PL")}</span>
                         </div>
                         <div className="aticket-info">
-                            <span>Agent: {ticket.agent}</span>
+                            <span>Agent: {ticket.agent_id}</span>
                              <span className={`aticket-status ${ticket.status.toLowerCase()}`}>
                                  {ticket.status}
                              </span>

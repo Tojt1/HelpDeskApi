@@ -71,28 +71,6 @@ def get_all_tickets_by_status(status, sort,  limit, page):
     sort = allowed_sort.get(sort, "id")
     return repository.get_tickets_by_status(status, sort, limit, offset)
 
-# Get all tckets
-def get_all_tickets(limit, page, sort):
-    offset = (page-1) * limit
-    sort = allowed_sort.get(sort, "id")
-    rows = repository.get_all_tickets(limit, offset, sort)
-    if not rows:
-        return {"information": "Nie ma żadnych ticketów"}
-    return[{
-        "id":row[0],
-        "title":row[1],
-        "description":row[2],
-        "status":row[3],
-        "priority":row[4],
-        "category":row[5],
-        "author_id":row[6],
-        "agent_id":row[7],
-        "updated":row[8],
-        "closed":row[9]
-    }
-        for row in rows
-    ]
-
 # Get tickets created by user
 def get_tickets_by_user(token):
     user_id = decode_token(token)["id"]
@@ -124,3 +102,29 @@ def delete_ticket(user_id, ticket_id, token):
         return {"error":"Nie ma takiego ticketu"}
 
     return repository.delete_ticket(ticket_id)
+
+
+
+
+# Get all tckets
+def get_all_tickets(limit, page, sort):
+    offset = (page-1) * limit
+    sort = allowed_sort.get(sort, "id")
+    rows = repository.get_all_tickets(limit, offset, sort)
+    if not rows:
+        return []
+    return[{
+        "id":row[0],
+        "title":row[1],
+        "description":row[2],
+        "status":row[3],
+        "priority":row[4],
+        "category":row[5],
+        "author_id":row[6],
+        "agent_id":row[7],
+        "created":row[8],
+        "updated":row[9],
+        "closed":row[10]
+    }
+        for row in rows
+    ]

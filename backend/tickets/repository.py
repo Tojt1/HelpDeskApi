@@ -96,20 +96,6 @@ def get_tickets_by_status(status, sort,  limit, offset):
         finally:
             pool.putconn(conn)
 
-# Get all tickets
-def get_all_tickets(limit, offset, sort):
-    conn = pool.getconn()
-
-    with conn.cursor() as cur:
-        try:
-            cur.execute(f"SELECT * FROM tickets ORDER BY {sort} DESC LIMIT %s OFFSET %s", (limit, offset))
-            return cur.fetchall()
-
-        except Exception:
-            raise exceptions.DbDownloadError("Wystąpił błąd podczas pobierania ticketów")
-
-        finally:
-            pool.putconn(conn)
 
 # Get tickets created by specific user
 def get_tickets_by_user(user_id):
@@ -137,6 +123,22 @@ def delete_ticket(ticket_id):
             #Zwrócić odpowiedni błąd
             conn.rollback()
             print()
+
+        finally:
+            pool.putconn(conn)
+
+
+# Get all tickets
+def get_all_tickets(limit, offset, sort):
+    conn = pool.getconn()
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute(f"SELECT * FROM tickets ORDER BY {sort} DESC LIMIT %s OFFSET %s", (limit, offset))
+            return cur.fetchall()
+
+        except Exception:
+            raise exceptions.DbDownloadError("Wystąpił błąd podczas pobierania ticketów")
 
         finally:
             pool.putconn(conn)
