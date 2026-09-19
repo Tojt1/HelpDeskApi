@@ -4,7 +4,7 @@ import Home from "./pages/users/Home.jsx";
 import RegisterUser from "./pages/users/register.jsx";
 import Dashboard from "./pages/users/Dashboard.jsx";
 import CheckLogged from "./components/users/CheckLogged.jsx";
-import Settings from "./pages/commons/Settings.jsx";
+import Settings from "./pages/users/Settings.jsx";
 import { Routes, Route} from "react-router";
 import CreateTicket from "./pages/users/CreateTicket.jsx";
 import Ticket from "./pages/users/Ticket.jsx";
@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/admins/AdminDashboard.jsx";
 import UserLayout from "./components/users/UserLayout.jsx";
 import AdminTicket from "./pages/admins/AdminTicket.jsx";
 import AdminLayout from "./components/AdminLayout.jsx";
+import AdminSettings from "./pages/admins/AdminSettings.jsx";
 
 function App() {
 
@@ -34,8 +35,9 @@ function App() {
 
               <Route element={<RequireAdmin />}>
                   <Route element={<AdminLayout/>}>
-                    <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
-                    <Route path="/admin/:ticket_id" element={<AdminTicket />}></Route>
+                      <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+                      <Route path="/admin/:ticket_id" element={<AdminTicket />}></Route>
+                      <Route path="/admin/settings" element={<AdminSettings />}></Route>
                   </Route>
               </Route>
 
