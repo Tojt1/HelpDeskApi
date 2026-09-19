@@ -1,4 +1,8 @@
 import {useState, useEffect} from "react";
+import ChangeEmail from "../../components/commons/ChangeEmail.jsx";
+import ChangeName from "../../components/commons/ChangeName.jsx";
+import ChangePassword from "../../components/commons/ChangePassword.jsx";
+import "./AdminSettings.css"
 
 function AdminSettings (){
     const [admin, setAdmin] = useState([])
@@ -20,12 +24,27 @@ function AdminSettings (){
     return(
         <div className="asettings-container">
             <h1>Cześć {admin.name}</h1>
-            <h3>Id: {admin.id}</h3>
-            <h3>Name: {admin.name}</h3>
-            <h3>Email: {admin.email}</h3>
-            <h3>Password: ******</h3>
-            <h3>Role: {admin.role}</h3>
-            <h3>created: {new Date(admin.created).toLocaleDateString("pl-PL")}</h3>
+            <div className="asettings-row">
+                <h3>Id: {admin.id}</h3>
+            </div>
+            <div className="asettings-row">
+                <h3>Name: {admin.name}</h3>
+                <ChangeName />
+            </div>
+            <div className="asettings-row">
+                <h3>Email: {admin.email}</h3>
+                <ChangeEmail />
+            </div>
+            <div className="asettings-row">
+                <h3>Password: ******</h3>
+                <ChangePassword />
+            </div>
+            <div className="asettings-row">
+                <h3>Role: {admin.role}</h3>
+            </div>
+            <div className="asettings-row">
+                <h3>created: {new Date(admin.created).toLocaleDateString("pl-PL")}</h3>
+            </div>
         </div>
     )
 }
