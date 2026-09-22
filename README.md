@@ -101,4 +101,4 @@ aby uruchomić:
 
 ---
 ## 🧑‍💻 Status projektu
-Projekt jest ciągle rozwijany, służy on jako projekt edukacyjny.
+Pracę nad projektem zostały zakończone
